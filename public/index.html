@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Task Manager - Login page</title>
+    <script type="text/javascript" src="superfetch2.js"></script>
 </head>
 
 <body>
@@ -74,28 +75,19 @@
         }
     }
     
-    var url = "http://localhost:8080/myroute/";
+    var url = "http://127.0.0.1:8080";
+    superfetch(url, "text", succ, error);
 
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "text/plain");
-
-    var cnf = {
-        method: "POST",
-        headers: myHeaders, 
-        body: "myupdata"
+    //success --------------------------------------
+    function succ(data) {
+        console.log(data); //Hello World!
     }
-    fetch(url, settings).then(function(resp) {        
-            console.log(resp.status) //200
 
-            //retrieving the data in the body
-            return resp.text(); //use resp.json() for JSON-data
+    //error ----------------------------------------
+    function error(err) {
+        console.log(err);
+    }   
 
-        }).then(function(data) {        
-            console.log(data); //Hello world        
-        }).catch(function(error) {        
-            console.log(error);        
-        });
-    );
 
 
 </script>   
