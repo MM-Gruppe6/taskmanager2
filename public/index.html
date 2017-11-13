@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task Manager - Login page</title>
+</head>
+
+<body>
+  <div class="container" id="loginPage">
+    <img id="logo" src="../pictures/Taskmanager_white.png"> 
+    <h3 id="simply">- Simply a taskmanager - </h3>
+    <p id="text">If you have a user, you can login to your account with your username and password.</p>
+    
+    <input class="inputfield" id="username" type="text" id="username" placeholder="Username"><br>
+    <input class="inputfield" id="password" type="password" id="password" placeholder="Password" name="password"> <br>
+    <button type="button" class="buttons" id="loginbutton" onclick="login()">Login</button>
+
+    <p id="forgot"><a href="#">Forgot your password?</a></p>
+    <hr>
+    <p>Don't have an account?</p>
+    <button id="signupbutton" class="buttonsBottom" onclick="signUpButton()">Sign up</button>
+  </div>
+  
+    <div class="container" id="signupPage" hidden>
+        <img id="logo" src="../pictures/Taskmanager_white.png"> 
+        <h3 id="simply">- Simply a taskmanager - </h3>
+        <p id="text">Sign up to our task manager</p>
+
+        <input class="inputfield" id="firstname" type="text" id="firstname" placeholder="Firstname"><br>    
+        <input class="inputfield inputfieldUnder" id="surename" type="text" id="surename" placeholder="Surename"><br>    
+        <input class="inputfield inputfieldUnder" id="username" type="text" id="username" placeholder="Username"><br>
+        <input class="inputfield inputfieldUnder" id="password" type="password" placeholder="Password" name="password"> <br>
+        <input class="inputfield inputfieldUnder" id="email" type="text"  placeholder="E-mail" name="email"> <br>
+        <button type="button" id="loginbutton" class="buttons" onclick="login()">Login</button>
+
+        <p id="forgot"><a href="#">Forgot your password?</a></p>
+        <hr>
+        <p>Have an account?</p>
+        <button id="getLogin" class="buttonsBottom" onclick="singInButton()">Sign In</button>      
+  </div>
+
+<script type="text/javascript">
+    
+    //Lager variabler
+    let username = document.getElementById("username").value;
+    
+    function signUpButton () {
+        
+        var signupBox = document.getElementById("signupPage");
+        var loginBox = document.getElementById("loginPage");
+                
+        if(signupBox) {
+            signupBox.removeAttribute("hidden");    
+        }
+        
+        if(loginBox) {
+            loginBox.setAttribute("hidden","");
+        }
+    }
+
+    function singInButton() {
+        var signupBox = document.getElementById("signupPage");
+        var loginBox = document.getElementById("loginPage");
+                
+        if(signupBox) {
+            signupBox.setAttribute("hidden", "");    
+        }
+        
+        if(loginBox) {
+            loginBox.removeAttribute("hidden");
+        }
+    }
+
+</script>   
+
+<style>
+    body {
+        background-color: beige;
+        background-image: url(../pictures/helloquence-61189.jpg)
+    }
+    #logo {
+        width: 100%;
+    }
+    
+    #simply {
+        font-family: monospace;
+        margin-top: -5px;
+        color: white;
+    }
+    
+    p {
+        font-family: monospace;
+    }
+
+    .container {
+        padding: 150px;
+        text-align: center;
+        width: 300px;
+        margin:0 auto;
+        background-color: rgba(255,255,255,0.5);
+        border-radius:10px;
+        margin-top: 150px;
+    }
+    
+    .inputfield {
+        height: 40px;
+        text-align: center;
+        border-radius: 2px;
+        width: 100%;
+        background-color: rgba(255,255,255,0.3);
+        border: 2px solid white;
+        
+    }    
+
+    .inputfield:focus {
+        outline: none;
+        color: white;
+    }    
+    #password {
+        border-top:0px;
+        margin-top: -2px;
+    }
+    .inputfield::placeholder {
+        color: white;
+        font-family: monospace ;
+    }
+    
+    .inputfieldUnder {
+        border-top: 0px solid white;
+    }
+    
+    .buttons{
+        height: 40px;
+        width: 101.3%;
+        border-radius: 5px;
+        
+        background-color: rgba(52,52,52,0);
+        color: white;
+        border: 2px solid white;
+        margin-top: 5px;
+    }
+    #loginbutton:focus {
+        outline: none;
+        color: white;
+    }   
+    
+    #loginbutton:active {
+        outline: none;
+        color: white;
+    }   
+    #loginbutton:hover{
+        background-color: white;
+        color: grey;
+        cursor: pointer;
+    }
+
+    #forgot>a{
+        color: white;
+        text-decoration: none;
+    }
+    
+    .buttonsBottom {
+        border:0px solid black;
+        background: rgba(0,0,0,0.0);
+        text-align: center;
+        display: inline-block;
+        color: white;
+        
+    }
+
+        
+</style>
+</body>
+</html>    
+   
