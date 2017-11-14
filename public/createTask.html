@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>test client</title>    
+    <script src="superfetch2.js"></script>
+</head>
+
+<body>    
+    <input id="inpTask" placeholder="Task">
+    <textarea id="inpDescr" placeholder="Description"></textarea>
+    <button id="btnCreate">Create Task</button>    
+</body>    
+
+<script>    
+    var inpTask = document.getElementById("inpTask");
+    var inpDescr = document.getElementById("inpDescr");
+    var btnCreate = document.getElementById("btnCreate");
+    
+    //set current date and time as default value in the input-fields
+    var now =  new Date().toISOString().slice(0, -8) + "z";
+    var inpStarttime = now;
+    
+    //button click ---------------------------------
+    btnCreate.onclick = function() {   
+    
+        var upload = JSON.stringify({            
+            tittel: inpTask.value,
+            beskrivelse: inpDescr.value,
+            tid: now.value,
+        });
+        
+        var url = "http://localhost:8080/taskmanager2/tasks/";
+
+        var cfg = {
+            method: "POST",            
+            body: upload
+        }      
+
+    }
+        
+    //success --------------------------------------
+    function succ(data) {
+        console.log(data); //Hello World!
+    }
+
+    //error ----------------------------------------
+    function error(err) {
+        console.log(err);
+    }   
+
+    </script>
+</html>
