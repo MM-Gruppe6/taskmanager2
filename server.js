@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
 
 //Jostein, stemmer dette, evt. hva skal stå her og hvorfor?
 var tasks = require('./tasks.js');
-app.use('taskmanager2/tasks/', tasks);
+app.use('/taskmanager2/tasks/', tasks);
 
 //Not yet implemented:
 //var users = require('./users.js');
