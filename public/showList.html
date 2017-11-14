@@ -12,7 +12,7 @@
 <body>
   <div class="container" id="loginPage">
     <img id="logo" src="../pictures/Taskmanager_white.png"> 
-    <h3 id="simply">- Simply a taskmanager - </h3>
+    <h3 id="simply">Your tasks </h3>
     <input id="subButton" type="submit" class="enter">
     <input type="text" id="newTask" placeholder="Enter task...">
   </div>
@@ -22,16 +22,19 @@
     
     //Må lage view
     //OBS må byttes ut
+    
+    var cont = document.getElementById("container");
     function succ(data) {        
         
         for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
-	    div.innerHTML += "<h3>ID: " + data[i].id + "</h3>";
-            div.innerHTML += "<h3>Task title: " + data[i].Tittel + "</h3>";
-            div.innerHTML += "<h3>Description: " + data[i].Beskrivelse + "</h3>";
+            div.innerHTML += "<button> ✔ </button>";
+            div.innerHTML += "<h3>Task title: " + data[i].tittel + "</h3>";
+            div.innerHTML += "<h3>Description: " + data[i].beskrivelse + "</h3>";
+            
             var hr = document.createElement("hr");            
-            document.body.appendChild(div);
-            document.body.appendChild(hr);
+            cont.appendChild(div);
+            cont.appendChild(hr);
     }
 </script>   
 

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/MM-Gruppe6/taskmanager2#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express.js": "^1.0.0",
     "pg-promise": "^7.3.1"
