@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task Manager - Login page</title>
+    <script type="text/javascript" src="superfetch2.js"></script>
+    <script src="superfetch2.js"></script>
+</head>
+
+<body>
+  <div class="container" id="loginPage">
+    <img id="logo" src="../pictures/Taskmanager_white.png"> 
+    <h3 id="simply">- Simply a taskmanager - </h3>
+    <input id="subButton" type="submit" class="enter">
+    <input type="text" id="newTask" placeholder="Enter task...">
+  </div>
+
+<script type="text/javascript">
+    //success --------------------------------------
+    
+    //Må lage view
+    //OBS må byttes ut
+    function succ(data) {        
+        
+        for (var i = 0; i < data.length; i++) {
+            var div = document.createElement("div");
+	    div.innerHTML += "<h3>ID: " + data[i].id + "</h3>";
+            div.innerHTML += "<h3>Task title: " + data[i].Tittel + "</h3>";
+            div.innerHTML += "<h3>Description: " + data[i].Beskrivelse + "</h3>";
+            var hr = document.createElement("hr");            
+            document.body.appendChild(div);
+            document.body.appendChild(hr);
+    }
+</script>   
+
+<style>
+    body {
+        background-color: beige;
+        background-image: url(../pictures/helloquence-61189.jpg)
+    }
+    #logo {
+        width: 100%;
+    }
+    
+    #simply {
+        font-family: monospace;
+        margin-top: -5px;
+        color: white;
+    }
+    
+    p {
+        font-family: monospace;
+    }
+
+    .container {
+        padding: 150px;
+        text-align: center;
+        width: 300px;
+        margin:0 auto;
+        background-color: rgba(255,255,255,0.5);
+        border-radius:10px;
+        margin-top: 150px;
+    }
+    
+    .inputfield {
+        height: 40px;
+        text-align: center;
+        border-radius: 2px;
+        width: 100%;
+        background-color: rgba(255,255,255,0.3);
+        border: 2px solid white;
+        
+    }    
+
+    .inputfield:focus {
+        outline: none;
+        color: white;
+    }    
+    #password {
+        border-top:0px;
+        margin-top: -2px;
+    }
+    .inputfield::placeholder {
+        color: white;
+        font-family: monospace ;
+    }
+    
+    .inputfieldUnder {
+        border-top: 0px solid white;
+    }
+    
+    .buttons{
+        height: 40px;
+        width: 101.3%;
+        border-radius: 5px;
+        
+        background-color: rgba(52,52,52,0);
+        color: white;
+        border: 2px solid white;
+        margin-top: 5px;
+    }
+    #loginbutton:focus {
+        outline: none;
+        color: white;
+    }   
+    
+    #loginbutton:active {
+        outline: none;
+        color: white;
+    }   
+    #loginbutton:hover{
+        background-color: white;
+        color: grey;
+        cursor: pointer;
+    }
+
+    #forgot>a{
+        color: white;
+        text-decoration: none;
+    }
+    
+    .buttonsBottom {
+        border:0px solid black;
+        background: rgba(0,0,0,0.0);
+        text-align: center;
+        display: inline-block;
+        color: white;
+        
+    }
+    .enter {
+    height: 40px;
+        margin-right: -10px;
+        border-radius: 5px;
+        padding-top: 2px;
+    }
+    #newTask {
+        height: 34px;
+        border-radius: 5px;
+        
+    }
+    
+
+        
+</style>
+</body>
+</html>    
+   
+    
+
+        
+

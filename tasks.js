@@ -2,10 +2,14 @@ var express = require('express');
 var router = express.Router();
 var db = require('./dbconnect'); //database
 
-//endpoint: GET travels -----------------------------
+
+//endpoint: GET tasks 
 router.get('/', function (req, res) {   
     
-    var sql = 'SELECT * FROM travelsview';
+    
+    //OBS må lage et taskview!!!
+    //SELECT * fra en hviss bruker FROM taskview
+    var sql = 'SELECT * FROM taskview';
     db.any(sql).then(function(data) {        
         
         res.status(200).json(data); //success – send the data as JSON!
@@ -17,5 +21,5 @@ router.get('/', function (req, res) {
     });   
 });
 
-//export module -------------------------------------
+//export module 
 module.exports = router;
