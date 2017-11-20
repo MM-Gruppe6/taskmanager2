@@ -20,7 +20,7 @@ router.get('/', bodyParser, function (req, res) {
     }).catch(function(err) {        
         
         res.status(500).json(err);
-        
+         
     });   
 });
 
