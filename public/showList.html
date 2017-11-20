@@ -13,7 +13,7 @@
   <div class="container" id="loginPage">
     <img id="logo" src="../pictures/Taskmanager_white.png"> 
     <h3 id="simply">Your tasks </h3>
-    <input id="subButton" type="submit" class="enter">
+    <input id="subButton" type="submit" class="enter" value="Add task">
     <input type="text" id="newTask" placeholder="Enter task...">
   </div>
 
@@ -28,7 +28,7 @@
         
         for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
-            div.innerHTML += "<button> ✔ </button>";
+            div.innerHTML += "<button> Done ✔ </button>";
             div.innerHTML += "<h3>Task title: " + data[i].tittel + "</h3>";
             div.innerHTML += "<h3>Description: " + data[i].beskrivelse + "</h3>";
             
