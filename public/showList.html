@@ -13,16 +13,33 @@
   <div class="container" id="loginPage">
     <img id="logo" src="../pictures/Taskmanager_white.png"> 
     <h3 id="simply">Your tasks </h3>
-    <input id="subButton" type="submit" class="enter" value="Add task">
     <input type="text" id="newTask" placeholder="Enter task...">
+    <input type="text" id="newDescription" placeholder="Enter description...">
+    
+    <input id="subButton" type="submit" class="enter" value="Add task"><br>
+    <input id="btnDelete" type="submit" class="enter" value="Delete task">
+    <input type="text" id="inpID" placeholder="Task to delete">
   </div>
 
 <script type="text/javascript">
+    
+    var inpID = document.getElementById("inpID");
+    var btnDelete = document.getElementById("btnDelete");
+    
+    btnDelete.onclick = function() {
+        
+        var url = "http://localhost:3000/travellog/travels/?travelid=" + inpID.value;        
+        superfetch(url, "json", delSucc, error, {method: "DELETE"});        
+    }
+    
+    //delete success -------------------------------
+    function delSucc(data) {
+        console.log(data);
+    }
+
+    
     //success --------------------------------------
-    
-    //Må lage view
-    //OBS må byttes ut
-    
+   
     var cont = document.getElementById("container");
     function succ(data) {        
         
@@ -35,6 +52,7 @@
             var hr = document.createElement("hr");            
             cont.appendChild(div);
             cont.appendChild(hr);
+        }
     }
 </script>   
 
