@@ -10,7 +10,7 @@ router.get('/', bodyParser, function (req, res) {
     
     //INSERT INTO travels VALUES(DEFAULT, $2, $3, $4, $5)
     
-    console.log(sql)
+    //console.log(sql)
     
     db.any(sql).then(function(data) {
         
@@ -28,15 +28,17 @@ router.get('/', bodyParser, function (req, res) {
 router.post('/', bodyParser, function (req, res) {   
     
     var upload = JSON.parse(req.body);
+    
+    console.log(upload);
     //Note. the uploaded data should also be sanitized for any malicious code, e.g. use the module ‘sanitize-html’
     
-    /*var sql = `PREPARE insert_task (int, int, text, text, timestamp) AS
+    var sql = `PREPARE insert_task (int, int, text, text, timestamp) AS
                 INSERT INTO tasks VALUES(DEFAULT, $2, $3, $4, $5); EXECUTE insert_task
-                (0, '${upload.tittel}', '${upload.beskrivelse}', '2017-11-03 13:00')`;*/
+                (0, 1, '${upload.tittel}', '${upload.beskrivelse}', '2017-11-03 13:00')`;
     
     //var sql = "INSERT INTO tasks VALUES (DEFAULT, 1, 'dsfdf', 'sdfss', '2016-11-22 12:00')";
     
-    var sql = "SELECT * FROM tasks";
+    //var sql = "SELECT * FROM tasks";
     
     //INSERT INTO travels VALUES(DEFAULT, $2, $3, $4, $5)
     
