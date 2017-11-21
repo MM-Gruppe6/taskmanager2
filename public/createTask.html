@@ -38,7 +38,7 @@
        console.log(id) 
         
         
-        var url = "http://localhost:8080/taskmanager2/tasks/?taskid=" + id;        
+        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/?taskid=" + id;        
         superfetch(url, "json", delSucc, error, {method: "DELETE"});      
         window.location.reload();
     }
@@ -61,7 +61,7 @@
             tid: now.value,
         });
         
-        var url = "http://localhost:8080/taskmanager2/tasks/";
+        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/";
 
         var cfg = {
             method: "POST",            
@@ -86,7 +86,7 @@
     //show tasks in a list -------------------------
     function showList(){
         
-        var url = "http://localhost:8080/taskmanager2/tasks/";       
+        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/";       
         
         superfetch(url, "json", function(data){
             
