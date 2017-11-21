@@ -9,8 +9,8 @@
 
 <body>    
     <div id="top-field">
-    <input id="inpTask" placeholder="Task">
-    <textarea id="inpDescr" placeholder="Description"></textarea>
+    <input id="inpTask" placeholder="Oppgave">
+    <textarea id="inpDescr" placeholder="Beskrivelse..."></textarea>
     <button id="btnCreate">Create Task</button>
     </div>
     <div id="cont"></div>
@@ -26,7 +26,8 @@
     var now =  new Date().toISOString().slice(0, -8) + "z";
     var inpStarttime = now;
      
-    
+    showList();
+
     function btnDelete(evt) {
         
        var id = evt.currentTarget.id;
@@ -34,9 +35,8 @@
         
         
         var url = "http://localhost:8080/taskmanager2/tasks/?taskid=" + id;        
-        superfetch(url, "json", delSucc, error, {method: "DELETE"});        
-        window.location.href = window.location.pathname + window.location.search + window.location.hash;
-
+        superfetch(url, "json", delSucc, error, {method: "DELETE"});      
+        window.location.reload();
     }
     
     //delete success -------------------------------
@@ -46,7 +46,6 @@
 
     
     
-    showList();
     
     //button click ---------------------------------
     btnCreate.onclick = function() {   
@@ -66,7 +65,7 @@
         } 
         
         superfetch(url, "text", succ, error, cfg);
-        window.location.href = window.location.pathname + window.location.search + window.location.hash;
+        window.location.reload();
     }
         
     //success --------------------------------------
@@ -92,18 +91,13 @@
             for (var i = 0; i < data.length; i++) {
                 var div = document.createElement("div");
                 
-                
                 var slettKnapp = document.createElement("button");
-                
                 slettKnapp.id = data[i].id;
                 slettKnapp.innerHTML = "✔";
                 slettKnapp.addEventListener("click", btnDelete);
-                
-                
-                
-                //div.innerHTML += "<button>Slett</button>"
-                div.innerHTML += "<h1>Task title: " + data[i].tittel + "</h1>";
-                div.innerHTML += "<h3>Description: " + data[i].beskrivelse + "</h3>";
+                                
+                div.innerHTML += "<h1>" + data[i].tittel + "</h1>";
+                div.innerHTML += "<h3>" + data[i].beskrivelse + "</h3>";
                 div.appendChild(slettKnapp);
 
                 var hr = document.createElement("hr");            
