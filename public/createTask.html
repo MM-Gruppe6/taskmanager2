@@ -98,8 +98,12 @@
                 
                 var slettKnapp = document.createElement("button");
                 slettKnapp.id = data[i].id;
+
                 slettKnapp.className = "innhold";
                 slettKnapp.innerHTML = "?";
+
+                slettKnapp.innerHTML = "✔";
+
                 slettKnapp.addEventListener("click", btnDelete);
                                 
                 div.innerHTML += "<h3 class=" + "'innhold'" + ">" + data[i].tittel + "</h3>";
