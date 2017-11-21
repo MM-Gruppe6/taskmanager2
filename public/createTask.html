@@ -8,9 +8,9 @@
 </head>
 
 <body>    
-    <input id="inpTask" placeholder="Task">
-    <textarea id="inpDescr" placeholder="Description"></textarea>
-    <button id="btnCreate">Create Task</button>
+    <input id="inpTask" placeholder="Gjøremål">
+    <textarea id="inpDescr" placeholder="Beskrivelse"></textarea>
+    <button id="btnCreate">Legg til  </button>
     
     <div id="cont"></div>
 </body>    
@@ -67,11 +67,12 @@
             
             console.log(data)
             
-            for (var i = 0; i < data.length; i++) {
+            for (var i = 0; i< data.length; i++) {
                 var div = document.createElement("div");
-                div.innerHTML += "<button> Done ✔ </button>";
-                div.innerHTML += "<h3>Task title: " + data[i].tittel + "</h3>";
-                div.innerHTML += "<h3>Description: " + data[i].beskrivelse + "</h3>";
+                
+                div.innerHTML += "<h3>Gjøremål: " + data[i].tittel + "</h3>";
+                div.innerHTML += "<h3>Beskrivelse: " + data[i].beskrivelse + "</h3>";
+                div.innerHTML += "<button>  ✔ </button>";
 
                 var hr = document.createElement("hr");            
                 cont.appendChild(div);
