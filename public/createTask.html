@@ -8,17 +8,11 @@
 </head>
 
 <body>    
-
     <div id="top-field">
     <input id="inpTask" placeholder="Oppgave">
     <textarea id="inpDescr" placeholder="Beskrivelse..."></textarea>
     <button id="btnCreate">Create Task</button>
     </div>
-
-    <input id="inpTask" placeholder="Gjøremål">
-    <textarea id="inpDescr" placeholder="Beskrivelse"></textarea>
-    <button id="btnCreate">Legg til  </button>
-    
     <div id="cont"></div>
 </body>    
 
@@ -33,7 +27,6 @@
     var inpStarttime = now;
      
     showList();
-
 
     function btnDelete(evt) {
         
@@ -50,11 +43,13 @@
     function delSucc(data) {
         console.log(data);
     }
+
+    
+    
     
     //button click ---------------------------------
     btnCreate.onclick = function() {   
     
-        window.location.reload();
         
         var upload = JSON.stringify({            
             tittel: inpTask.value,
@@ -92,7 +87,7 @@
         superfetch(url, "json", function(data){
             
             console.log(data)
-
+            
             for (var i = 0; i < data.length; i++) {
                 var div = document.createElement("div");
                 
@@ -104,14 +99,6 @@
                 div.innerHTML += "<h1>" + data[i].tittel + "</h1>";
                 div.innerHTML += "<h3>" + data[i].beskrivelse + "</h3>";
                 div.appendChild(slettKnapp);
-              
-            for (var i = 0; i< data.length; i++) {
-                var div = document.createElement("div");
-                
-                div.innerHTML += "<h3>Gjøremål: " + data[i].tittel + "</h3>";
-                div.innerHTML += "<h3>Beskrivelse: " + data[i].beskrivelse + "</h3>";
-                div.innerHTML += "<button>  ✔ </button>";
-
 
                 var hr = document.createElement("hr");            
                 cont.appendChild(div);
