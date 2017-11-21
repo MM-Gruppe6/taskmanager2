@@ -57,15 +57,17 @@ router.post('/', bodyParser, function (req, res) {
 //endpoint: DELETE travels -----------------------------
 router.delete('/', function (req, res) {      
 
-    var upload = req.query.travelid; //uploaded data should be sanitized
+    var upload = req.query.taskid; //uploaded data should be sanitized
 
     var sql = `PREPARE delete_task (int) AS
             DELETE FROM tasks WHERE id=$1 RETURNING *;
-            EXECUTE delete_task('${upload}')`;   
+            EXECUTE delete_task('${upload}')`;
+    
+    console.log(sql)
 
     db.any(sql).then(function(data) {
 
-        db.any("DEALLOCATE delete_tasks");       
+        db.any("DEALLOCATE delete_task");       
 
         if (data.length > 0) {
             res.status(200).json({msg: "delete ok"}); //success!

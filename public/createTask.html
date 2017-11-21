@@ -8,23 +8,50 @@
 </head>
 
 <body>    
+    <div id="top-field">
     <input id="inpTask" placeholder="Task">
     <textarea id="inpDescr" placeholder="Description"></textarea>
-    <button id="btnCreate">Create Task</button>    
+    <button id="btnCreate">Create Task</button>
+    </div>
+    <div id="cont"></div>
 </body>    
 
 <script>    
     var inpTask = document.getElementById("inpTask");
     var inpDescr = document.getElementById("inpDescr");
     var btnCreate = document.getElementById("btnCreate");
+    var cont = document.getElementById("cont");
     
     //set current date and time as default value in the input-fields
     var now =  new Date().toISOString().slice(0, -8) + "z";
     var inpStarttime = now;
+     
+    
+    function btnDelete(evt) {
+        
+       var id = evt.currentTarget.id;
+       console.log(id) 
+        
+        
+        var url = "http://localhost:8080/taskmanager2/tasks/?taskid=" + id;        
+        superfetch(url, "json", delSucc, error, {method: "DELETE"});        
+        window.location.href = window.location.pathname + window.location.search + window.location.hash;
+
+    }
+    
+    //delete success -------------------------------
+    function delSucc(data) {
+        console.log(data);
+    }
+
+    
+    
+    showList();
     
     //button click ---------------------------------
     btnCreate.onclick = function() {   
     
+        
         var upload = JSON.stringify({            
             tittel: inpTask.value,
             beskrivelse: inpDescr.value,
@@ -39,7 +66,7 @@
         } 
         
         superfetch(url, "text", succ, error, cfg);
-
+        window.location.href = window.location.pathname + window.location.search + window.location.hash;
     }
         
     //success --------------------------------------
@@ -50,7 +77,46 @@
     //error ----------------------------------------
     function error(err) {
         console.log(err);
-    }   
+    }
+    
+    
+    //show tasks in a list -------------------------
+    function showList(){
+        
+        var url = "http://localhost:8080/taskmanager2/tasks/";       
+        
+        superfetch(url, "json", function(data){
+            
+            console.log(data)
+            
+            for (var i = 0; i < data.length; i++) {
+                var div = document.createElement("div");
+                
+                
+                var slettKnapp = document.createElement("button");
+                
+                slettKnapp.id = data[i].id;
+                slettKnapp.innerHTML = "✔";
+                slettKnapp.addEventListener("click", btnDelete);
+                
+                
+                
+                //div.innerHTML += "<button>Slett</button>"
+                div.innerHTML += "<h1>Task title: " + data[i].tittel + "</h1>";
+                div.innerHTML += "<h3>Description: " + data[i].beskrivelse + "</h3>";
+                div.appendChild(slettKnapp);
+
+                var hr = document.createElement("hr");            
+                cont.appendChild(div);
+                cont.appendChild(hr);
+            }
+            
+             
+        }, function(err){
+             console.log("showlist: ", err);
+            
+        });
+    }
 
     </script>
 </html>
