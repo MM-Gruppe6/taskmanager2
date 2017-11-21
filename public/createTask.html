@@ -5,15 +5,19 @@
     <meta charset="utf-8" />
     <title>Task manager 2.0</title>    
     <script src="superfetch2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
 </head>
 
 <body>    
+    <div id="main-container">
     <div id="top-field">
-    <input id="inpTask" placeholder="Oppgave">
-    <textarea id="inpDescr" placeholder="Beskrivelse..."></textarea>
+    <input id="inpTask" placeholder="Oppgave"><br>  
+    <textarea id="inpDescr" placeholder="Beskrivelse..."></textarea><br>
     <button id="btnCreate">Lag oppgave</button>
     </div>
     <div id="cont"></div>
+    </div>
 </body>    
 
 <script>    
@@ -90,19 +94,24 @@
             
             for (var i = 0; i < data.length; i++) {
                 var div = document.createElement("div");
+                div.className = "element";
                 
                 var slettKnapp = document.createElement("button");
                 slettKnapp.id = data[i].id;
+
+                slettKnapp.className = "innhold";
+                slettKnapp.innerHTML = "?";
+
                 slettKnapp.innerHTML = "✔";
+
                 slettKnapp.addEventListener("click", btnDelete);
                                 
-                div.innerHTML += "<h1>" + data[i].tittel + "</h1>";
-                div.innerHTML += "<h3>" + data[i].beskrivelse + "</h3>";
+                div.innerHTML += "<h3 class=" + "'innhold'" + ">" + data[i].tittel + "</h3>";
+                div.innerHTML += "<p class=" + "'innhold'" + ">" + data[i].beskrivelse + "</p>";
                 div.appendChild(slettKnapp);
 
                 var hr = document.createElement("hr");            
                 cont.appendChild(div);
-                cont.appendChild(hr);
             }
             
              
@@ -114,7 +123,59 @@
 
     </script>
     <style>
-    background-color:black;
         
+        *{
+            font-family: 'Raleway', sans-serif;
+        }
+        textarea{
+            vertical-align: top;
+            height: 40px;
+            text-align: center;
+            border-radius: 5px;
+            width: 99.4%;
+            border-top:0px solid white;
+            margin-top: -3px;
+            background-color: rgba(255,255,255,0.3);
+            border: 2px solid grey;
+        }
+        input{
+            height: 40px;
+            text-align: center;
+            border-radius: 5px;
+            width: 100%;
+            background-color: rgba(255,255,255,0.3);
+            border: 2px solid grey;
+        }
+        
+        #btnCreate{
+            height: 37px;
+            width: 150px;
+        }
+        
+        #main-container {
+            width: 50%;
+            text-align: center;
+            background: rgba(52,52,52,0.1);
+            padding: 25px;
+            background-color:white ;
+        }
+        #cont {
+            width: 30%;
+        }
+        .element {
+            background-color: red;
+            width: 200%;
+        }
+        
+        .element>h3 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .innhold {
+            padding:5px;
+        }
+        body {
+            background-color: black;
+        }
     </style>
 </html>
