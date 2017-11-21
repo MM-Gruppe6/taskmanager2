@@ -8,6 +8,13 @@
 </head>
 
 <body>    
+
+    <div id="top-field">
+    <input id="inpTask" placeholder="Oppgave">
+    <textarea id="inpDescr" placeholder="Beskrivelse..."></textarea>
+    <button id="btnCreate">Create Task</button>
+    </div>
+
     <input id="inpTask" placeholder="Gjøremål">
     <textarea id="inpDescr" placeholder="Beskrivelse"></textarea>
     <button id="btnCreate">Legg til  </button>
@@ -26,6 +33,23 @@
     var inpStarttime = now;
      
     showList();
+
+
+    function btnDelete(evt) {
+        
+       var id = evt.currentTarget.id;
+       console.log(id) 
+        
+        
+        var url = "http://localhost:8080/taskmanager2/tasks/?taskid=" + id;        
+        superfetch(url, "json", delSucc, error, {method: "DELETE"});      
+        window.location.reload();
+    }
+    
+    //delete success -------------------------------
+    function delSucc(data) {
+        console.log(data);
+    }
     
     //button click ---------------------------------
     btnCreate.onclick = function() {   
@@ -46,7 +70,7 @@
         } 
         
         superfetch(url, "text", succ, error, cfg);
-
+        window.location.reload();
     }
         
     //success --------------------------------------
@@ -68,13 +92,26 @@
         superfetch(url, "json", function(data){
             
             console.log(data)
-            
+
+            for (var i = 0; i < data.length; i++) {
+                var div = document.createElement("div");
+                
+                var slettKnapp = document.createElement("button");
+                slettKnapp.id = data[i].id;
+                slettKnapp.innerHTML = "✔";
+                slettKnapp.addEventListener("click", btnDelete);
+                                
+                div.innerHTML += "<h1>" + data[i].tittel + "</h1>";
+                div.innerHTML += "<h3>" + data[i].beskrivelse + "</h3>";
+                div.appendChild(slettKnapp);
+              
             for (var i = 0; i< data.length; i++) {
                 var div = document.createElement("div");
                 
                 div.innerHTML += "<h3>Gjøremål: " + data[i].tittel + "</h3>";
                 div.innerHTML += "<h3>Beskrivelse: " + data[i].beskrivelse + "</h3>";
                 div.innerHTML += "<button>  ✔ </button>";
+
 
                 var hr = document.createElement("hr");            
                 cont.appendChild(div);
