@@ -6,17 +6,25 @@
     <title>Task manager 2.0</title>    
     <script src="superfetch2.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Black" rel="stylesheet">
 </head>
 
 <body>    
-    <div id="main-container">
+    <nav style="border-radius: 5px; height: 30px; padding: 5px; vertical-align: bottom;">
+        <a class="loggedin" >Logget inn som:</a>
+        <a class="logut"  href="#" >Logg ut</a>
+    </nav>
+    <div id="main-container" background="../pictures/helloquence-61189.jpg">
     <div id="top-field">
-    <input id="inpTask" placeholder="Oppgave"><br>  
-    <textarea id="inpDescr" placeholder="Beskrivelse..."></textarea><br>
+    <img id="logo" src="../pictures/Taskmanager_white.png" style="width: 100%; margin-bottom: 30px;"><br> 
+    <input id="inpTask" class="inputfield" placeholder="Tittel"><br>  
+    <input id="inpDescr" class="inputfield" placeholder="Beskrivelse..."><br>
     <button id="btnCreate">Lag oppgave</button>
     </div>
-    <div id="cont"></div>
+    <h2 id="oppgaver">Dine oppgaver:</h2>
+
+    <div id="cont">
+    </div>
     </div>
 </body>    
 
@@ -33,9 +41,12 @@
     showList();
 
     function btnDelete(evt) {
+    
+        var token = JSON.parse(localStorage.getItem("logindata")).token;
+        var url = "http://localhost:8080/taskmanager2/taks/?taskid=" + inpID.value + "&token=" + token; 
         
-       var id = evt.currentTarget.id;
-       console.log(id) 
+        var id = evt.currentTarget.id;
+        console.log(id); 
         
         
         var url = "http://localhost:8080/taskmanager2/tasks/?taskid=" + id;        
@@ -86,32 +97,38 @@
     //show tasks in a list -------------------------
     function showList(){
         
-        var url = "http://localhost:8080/taskmanager2/tasks/";       
+        var token = JSON.parse(localStorage.getItem("logindata")).token;
+        var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
+        
+
         
         superfetch(url, "json", function(data){
             
             console.log(data)
             
+            var token = JSON.parse(localStorage.getItem("logindata")).token;  
+            var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token;
+
+            console.log
+            
             for (var i = 0; i < data.length; i++) {
                 var div = document.createElement("div");
-                div.className = "element";
                 
+                div.className = "element";
+                div.innerHTML += "<hr>";
                 var slettKnapp = document.createElement("button");
                 slettKnapp.id = data[i].id;
 
-                slettKnapp.className = "innhold";
-                slettKnapp.innerHTML = "?";
-
+                slettKnapp.className = "innhold, slettknapp";
                 slettKnapp.innerHTML = "✔";
-
                 slettKnapp.addEventListener("click", btnDelete);
-                                
-                div.innerHTML += "<h3 class=" + "'innhold'" + ">" + data[i].tittel + "</h3>";
-                div.innerHTML += "<p class=" + "'innhold'" + ">" + data[i].beskrivelse + "</p>";
-                div.appendChild(slettKnapp);
+                
+                div.innerHTML += "<h3 class=" + "'innhold, tittel'" + ">" + data[i].tittel + "</h3>";
+                div.innerHTML += "<p class=" + "'innhold, beskrivelse'" + ">" + data[i].beskrivelse + "</p>";
 
-                var hr = document.createElement("hr");            
                 cont.appendChild(div);
+                var hr = document.createElement("hr");            
+                
             }
             
              
@@ -124,58 +141,164 @@
     </script>
     <style>
         
-        *{
-            font-family: 'Raleway', sans-serif;
-        }
-        textarea{
-            vertical-align: top;
-            height: 40px;
-            text-align: center;
-            border-radius: 5px;
-            width: 99.4%;
-            border-top:0px solid white;
-            margin-top: -3px;
-            background-color: rgba(255,255,255,0.3);
-            border: 2px solid grey;
-        }
-        input{
-            height: 40px;
-            text-align: center;
-            border-radius: 5px;
-            width: 100%;
-            background-color: rgba(255,255,255,0.3);
-            border: 2px solid grey;
-        }
+    *{
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .inputfield {
+        height: 40px;
+        text-align: center;
+        border-radius: 2px;
+        width: 100%;
+        background-color: rgba(0,0,0,0.3);
+        border: 2px solid white;
+        
+    }    
+
+    .inputfield:focus {
+        outline: none;
+        color: white;
+    }
+    .inputfield::placeholder {
+        color: white;
+        font-family: monospace, sans-serif;
+    }
         
         #btnCreate{
             height: 37px;
-            width: 150px;
+            width: 250px;
+            border-radius: 25px;
+            margin-left: 3px;
+            margin-top: 5px;
+            color: white;
+            border:2px solid white;
+            background-color: grey;
+        }
+        #btnCreate:hover{
+            height: 37px;
+            width: 250px;
+            border-radius: 25px;
+            margin-left: 3px;
+            margin-top: 5px;
+            color: gray;
+            border:2px solid grey;
+            background-color: white;
+            cursor: pointer;
         }
         
         #main-container {
-            width: 50%;
-            text-align: center;
-            background: rgba(52,52,52,0.1);
-            padding: 25px;
-            background-color:white ;
-        }
+        padding: 150px;
+        text-align: center;
+        width: 300px;
+        margin:0 auto;
+        background-color: rgba(255,255,255,0.5);
+        border-radius:10px;
+        margin-top: 150px;
+    }
+
+
         #cont {
             width: 30%;
         }
+
+        #inpDescr::placeholder{
+            padding-top: 10px;
+        }
+        #inpDescr:focus {
+            padding-bottom:-20px;
+            padding-top: 10px;
+        }
+        #cont>h3 {
+            text-align: center;
+            
+        }
+        #oppgaver {
+            color: white;
+        }
+        
+        /*Tasks*/
+        .slettknapp {
+            border-radius: 7px;
+            height: 50px;
+            width: 50px;
+            background-color: white;
+            border: 2px solid grey;
+            font-size: 30px;
+            margin-top: 20px;
+            
+        }
+        .slettknapp:hover {
+            cursor: pointer;
+            border-radius: 7px;
+            height: 50px;
+            width: 50px;
+            background-color: grey;
+            border: 2px solid white;
+            color: white;
+            font-size: 30px;
+        }
         .element {
-            background-color: red;
-            width: 200%;
+            width: 335%;
+            height: 180px;
+            border-radius: 7px;
+            margin-bottom: 25px;
+            vertical-align: baseline;
         }
         
         .element>h3 {
+            padding: 15px;
+            padding-left: 25px;
+            float: left;
             text-align: center;
             text-transform: uppercase;
+            margin-bottom: 15px;
         }
         .innhold {
-            padding:5px;
+            margin: 20px;
+            float: left;
+            vertical-align: middle;
         }
+        .beskrivelse {
+            float: left;
+            padding: 20px;
+            
+        }
+        /*Tasks slutt*/
+        
         body {
-            background-color: black;
+            background-image: url(../pictures/helloquence-61189.jpg);
+            text-align: center;
+        }
+
+        .loggedin {
+            font-size: 20px;
+            float: left;
+            font-family: 'Abel', sans-serif;
+            text-decoration: none;
+            color: black;
+            padding-left: 15px;
+
+        }
+        .loggedin:hover {
+            font-size: 20px;
+            float: left;
+            font-family: 'Abel', sans-serif;
+            text-decoration: none;
+            color: black;
+            padding-left: 15px;
+            cursor: default;
+        }
+        
+        .logut {
+            font-family: 'Abel', sans-serif;
+            text-decoration: none; 
+            float: right;
+            color: black;
+            font-size: 20px;
+            padding-right: 15px;
+        }
+        nav {
+            background-color: rgba(255,255,255,0.5);
         }
     </style>
 </html>

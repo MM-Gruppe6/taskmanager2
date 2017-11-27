@@ -19,8 +19,8 @@ var tasks = require('./tasks.js');
 app.use('/taskmanager2/tasks/', tasks);
 
 //Not yet implemented:
-//var users = require('./users.js');
-//app.use('/travellog/users/', users);
+var bruker = require('./bruker.js');
+app.use('/taskmanager2/bruker/', bruker);
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {

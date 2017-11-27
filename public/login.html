@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Task manager 2.0</title>    
+    <script src="superfetch2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Black" rel="stylesheet">
+</head>
+<body>
+    <div id="cont" style="text-align: center;">
+    <img id="logo" src="../pictures/Taskmanager_white.png"> 
+    <h3 id="simply">- Simply a taskmanager - </h3>
+    <h3 style="color: white;">Logg inn</h3>
+    <input id="brukernavn" class="inputfield" type="text" placeholder="Brukernavn"><br>
+    <input id="passord" class="inputfield" type="password" placeholder="Passord"><br>
+    <button id="btnLogin" class="buttons">Logg inn!</button>
+    <p style="color: white;">Har du ikke bruker?</p>
+    <a href="http://127.0.0.1:59009/public/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
+    <p hidden="hidden" id="feilpassord" style="color: white; background-color: #CD0000">Feil brukernavn eller passord</p>
+    </div>
+</body>
+<script>
+
+    var inpLoginname = document.getElementById("brukernavn");
+    var inpPassword = document.getElementById("passord");
+    var btnLogin = document.getElementById("btnLogin"); 
+    
+    //button click ---------------------------------
+    btnLogin.onclick = function() {   
+    console.log("inni login funksjonen");
+        var upload = JSON.stringify({            
+            loginnavn: inpLoginname.value,
+            passord: inpPassword.value            
+            
+        });
+
+        console.log(upload);
+        var url = "http://localhost:8080/taskmanager2/bruker/auth/";
+        
+        var cfg = {
+            method: "POST",            
+            body: upload
+        }      
+        console.log(cfg)
+        superfetch(url, "json", succ, error, cfg);
+    }
+    //success --------------------------------------
+    function succ(data) {
+
+        //save logindata/token to localStorage 
+        localStorage.setItem("logindata", JSON.stringify(data));
+        location.href = "http://127.0.0.1:59009/public/createTask.html";
+    }
+    
+    //error ----------------------------------------
+    function error(err) {
+        console.log(err);
+        var feil = document.getElementById("feilpassord");
+        feil.removeAttribute("hidden");
+        
+    }
+
+
+
+</script>
+<style>
+    #cont {
+        width: 700px;
+        background-color: grey;
+        text-align: center;
+        padding: 25px;
+    }
+    
+    body {
+        background-image: url(../pictures/helloquence-61189.jpg)
+    }
+    
+    #cont {
+        padding: 150px;
+        text-align: center;
+        width: 300px;
+        margin:0 auto;
+        background-color: rgba(255,255,255,0.5);
+        border-radius:10px;
+        margin-top: 150px;
+    }
+        #logo {
+        width: 100%;
+    }
+    
+    #simply {
+        font-family: monospace, sans-serif;
+        margin-top: -5px;
+        color: white;
+    }
+    .inputfield {
+        height: 40px;
+        text-align: center;
+        border-radius: 2px;
+        width: 100%;
+        background-color: rgba(0,0,0,0.3);
+        border: 2px solid white;
+        
+    }    
+
+    .inputfield:focus {
+        outline: none;
+        color: white;
+    }
+    
+    #btnLogin:focus {
+        outline: none;
+        color: white;
+    }   
+    
+    #btnLogin:active {
+        outline: none;
+        color: white;
+    }   
+    #btnLogin:hover{
+        background-color: white;
+        color: grey;
+        cursor: pointer;
+    }
+    .buttons{
+        height: 40px;
+        width: 101.3%;
+        border-radius: 5px;
+        
+        background-color: rgba(52,52,52,0);
+        color: white;
+        border: 2px solid white;
+        margin-top: 5px;
+    }
+    .inputfield::placeholder {
+        color: white;
+        font-family: monospace, sans-serif;
+    }
+</style>
+</html>

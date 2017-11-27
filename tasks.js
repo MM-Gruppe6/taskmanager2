@@ -2,11 +2,20 @@ var express = require('express');
 var router = express.Router();
 var db = require('./dbconnect'); //database
 var bodyParser = require('body-parser').text();
+var jwt = require("jsonwebtoken");
+
+var secret = "frenchfriestastegood!"; //used to check the token
+var logindata; //logindata from the token
+
+
 
 //endpoint: get travels -----------------------------
 router.get('/', bodyParser, function (req, res) {   
     
-    var sql = "SELECT * FROM tasks";
+    var sql = `PREPARE get_tasks (text) AS
+            SELECT * FROM taskview WHERE loginnavn=$1;
+            EXECUTE get_tasks('${logindata.loginnavn}')`;
+    console.log(logindata.loginnavn);
     
     //INSERT INTO travels VALUES(DEFAULT, $2, $3, $4, $5)
     
@@ -30,10 +39,11 @@ router.post('/', bodyParser, function (req, res) {
     var upload = JSON.parse(req.body);
     //Note. the uploaded data should also be sanitized for any malicious code, e.g. use the module ‘sanitize-html’
     
-    var sql = `PREPARE insert_task (int, int, text, text, timestamp) AS
-                INSERT INTO tasks VALUES(DEFAULT, $2, $3, $4, $5); EXECUTE insert_task
-                (0, 1, '${upload.tittel}', '${upload.beskrivelse}', '2017-11-03 13:00')`;
+    var sql = `PREPARE insert_task (int, text, text, timestamp, text) AS
+        INSERT INTO tasks VALUES(DEFAULT, $2, $3, $4, $5);
+        EXECUTE insert_task (0, '${upload.tittel}', '${upload.beskrivelse}’, '2017-11-03 13:00', '${logindata.loginnavn}')`;
     
+    console.log(sql);
     //var sql = "INSERT INTO tasks VALUES (DEFAULT, 1, 'dsfdf', 'sdfss', '2016-11-22 12:00')";
     
     //var sql = "SELECT * FROM tasks";
@@ -59,9 +69,9 @@ router.delete('/', function (req, res) {
 
     var upload = req.query.taskid; //uploaded data should be sanitized
 
-    var sql = `PREPARE delete_task (int) AS
-            DELETE FROM tasks WHERE id=$1 RETURNING *;
-            EXECUTE delete_task('${upload}')`;
+    var sql = `PREPARE delete_tasks (int, text) AS
+        DELETE FROM tasks WHERE id=$1 AND loginnavn=$2 RETURNING *;
+        EXECUTE delete_task('${upload}', '${logindata.loginnavn}')`;
     
     console.log(sql)
 

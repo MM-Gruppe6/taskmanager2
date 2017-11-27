@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Task manager 2.0</title>    
+    <script src="superfetch2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Black" rel="stylesheet">
+</head>
+<body>
+    <div id="cont">
+        <img id="logo" src="../pictures/Taskmanager_white.png">         
+        <h3 style="color: white;">Lag din bruker her!</h3>
+        <input id="brukernavn" class="inputfield" type="text" placeholder="Brukernavn"><br>
+        <input id="epost" type="text" class="inputfield" placeholder="E-postadresse"><br>
+        <input id="navn" type="text" class="inputfield" placeholder="For- og etternavn"><br>
+        <input id="passord"type="password" class="inputfield" placeholder="Passord"><br>
+        <button id="btnCreate" class="buttons">Lag bruker!</button>
+        <a href="http://127.0.0.1:59009/public/login.html" style="color: white;"><p>Eller logg inn her!</p></a>
+    </div>
+</body>
+<script>
+
+    var epost = document.getElementById("epost");
+    var inpLoginname = document.getElementById("brukernavn");
+    var inpPassword = document.getElementById("passord");
+    var inpFullname = document.getElementById("navn");    
+    var btnCreate = document.getElementById("btnCreate"); 
+    
+    //button click ---------------------------------
+    btnCreate.onclick = function() {   
+        console.log("vi er inne i funksjonen")
+        var upload = JSON.stringify({            
+            loginnavn: inpLoginname.value,
+            epost: epost.value,
+            passord: inpPassword.value,
+            navn: inpFullname.value            
+        });
+        
+        var url = "http://localhost:8080/taskmanager2/bruker/";
+
+        var cfg = {
+            method: "POST",            
+            body: upload
+        }      
+
+        superfetch(url, "json", succ, error, cfg);
+        var cont = document.getElementById("cont");
+        cont.innerHTML += "<p>Gratulerer du har nå laget en konto!</p>"
+        cont.innerHTML += "<a href="+'"http://127.0.0.1:57121/public/createTask.html">'+"<button> Logg inn her</button></a>"
+
+    }
+
+
+    
+    //success --------------------------------------
+    function succ(data) {
+
+        //save logindata/token to localStorage 
+        localStorage.setItem("logindata", JSON.stringify(data));
+    }
+    
+    //error ----------------------------------------
+    function error(err) {
+        console.log(err);
+    }
+
+
+</script>
+<style>
+    #cont {
+        width: 700px;
+        background-color: grey;
+        text-align: center;
+        padding: 25px;
+    }
+        #cont {
+        width: 700px;
+        background-color: grey;
+        text-align: center;
+        padding: 25px;
+    }
+    
+    body {
+        background-image: url(../pictures/helloquence-61189.jpg)
+    }
+    
+    #cont {
+        padding: 150px;
+        text-align: center;
+        width: 300px;
+        margin:0 auto;
+        background-color: rgba(255,255,255,0.5);
+        border-radius:10px;
+        margin-top: 150px;
+    }
+        #logo {
+        width: 100%;
+    }
+    
+    #simply {
+        font-family: monospace, sans-serif;
+        margin-top: -5px;
+        color: white;
+    }
+    .inputfield {
+        height: 40px;
+        text-align: center;
+        border-radius: 2px;
+        width: 100%;
+        background-color: rgba(0,0,0,0.3);
+        border: 2px solid white;
+        
+    }    
+
+    .inputfield:focus {
+        outline: none;
+        color: white;
+    }
+    
+    #btnCreate:focus {
+        outline: none;
+        color: white;
+    }   
+    
+    #btnCreate:active {
+        outline: none;
+        color: white;
+    }   
+    #btncreate:hover{
+        background-color: white;
+        color: grey;
+        cursor: pointer;
+    }
+    .buttons{
+        height: 40px;
+        width: 101.3%;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: rgba(52,52,52,0);
+        color: white;
+        border: 2px solid white;
+        margin-top: 5px;
+    }
+    .inputfield::placeholder {
+        color: white;
+        font-family: monospace, sans-serif;
+    }
+</style>
+</html>
