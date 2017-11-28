@@ -16,7 +16,7 @@
     <input id="passord" class="inputfield" type="password" placeholder="Passord"><br>
     <button id="btnLogin" class="buttons">Logg inn!</button>
     <p style="color: white;">Har du ikke bruker?</p>
-    <a href="http://127.0.0.1:59009/public/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
+    <a href="/public/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
     <p hidden="hidden" id="feilpassord" style="color: white; background-color: #CD0000">Feil brukernavn eller passord</p>
     </div>
 </body>
@@ -50,7 +50,7 @@
 
         //save logindata/token to localStorage 
         localStorage.setItem("logindata", JSON.stringify(data));
-        location.href = "http://127.0.0.1:59009/public/createTask.html";
+        location.href = "http://localhost:8080/createTask.html";
     }
     
     //error ----------------------------------------
