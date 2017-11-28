@@ -16,7 +16,7 @@
     <input id="passord" class="inputfield" type="password" placeholder="Passord"><br>
     <button id="btnLogin" class="buttons">Logg inn!</button>
     <p style="color: white;">Har du ikke bruker?</p>
-    <a href="http://127.0.0.1:63496/public/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
+    <a href="http://127.0.0.1:59762/public/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
     <p hidden="hidden" id="feilpassord" style="color: white; background-color: #CD0000">Feil brukernavn eller passord</p>
     </div>
 </body>
@@ -38,7 +38,7 @@
     btnLogin.onclick = function() {   
     console.log("inni login funksjonen");
         var upload = JSON.stringify({            
-            loginnavn: inpLoginname.value,
+            brukernavn: inpLoginname.value,
             passord: inpPassword.value            
             
         });
@@ -58,7 +58,7 @@
 
         //save logindata/token to localStorage 
         localStorage.setItem("logindata", JSON.stringify(data));
-        location.href = "http://127.0.0.1:63496/public/createTask.html";
+        location.href="http://127.0.0.1:59762/public/createTask.html";
     }
     
     //error ----------------------------------------
@@ -69,19 +69,16 @@
         
     }
 
-
-
 </script>
 <style>
-    #cont {
-        width: 700px;
-        background-color: grey;
-        text-align: center;
-        padding: 25px;
-    }
     
     body {
-        background-image: url(../pictures/helloquence-61189.jpg)
+        background-image: url(../pictures/helloquence-61189.jpg);
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
     }
     
     #cont {
@@ -93,7 +90,7 @@
         border-radius:10px;
         margin-top: 150px;
     }
-        #logo {
+    #logo {
         width: 100%;
     }
     

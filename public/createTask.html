@@ -37,55 +37,52 @@
     //set current date and time as default value in the input-fields
     var now =  new Date().toISOString().slice(0, -8) + "z";
     var inpStarttime = now;
+    
+    var token = JSON.parse(localStorage.getItem("logindata")).token;
      
     showList();
 
     function btnDelete(evt) {
-    
-        var token = JSON.parse(localStorage.getItem("logindata")).token;
-        var url = "http://localhost:8080/taskmanager2/taks/?taskid=" + inpID.value + "&token=" + token; 
-        
+
         var id = evt.currentTarget.id;
-        console.log(id); 
-        
-        
-        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/?taskid=" + id;        
+       
+        var url = " http://localhost:8080/taskmanager2/tasks/?taskid=" + id + "&token=" + token; 
+       
         superfetch(url, "json", delSucc, error, {method: "DELETE"});      
-        window.location.reload();
     }
     
     //delete success -------------------------------
     function delSucc(data) {
         console.log(data);
+        location.reload("http://127.0.0.1:63496/public/createTask.html");
     }
 
-    
-    
-    
     //button click ---------------------------------
     btnCreate.onclick = function() {   
     
-        
         var upload = JSON.stringify({            
             tittel: inpTask.value,
             beskrivelse: inpDescr.value,
             tid: now.value,
         });
         
-        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/";
-
+         var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
+        
         var cfg = {
             method: "POST",            
             body: upload
         } 
         
-        superfetch(url, "text", succ, error, cfg);
-        window.location.reload();
+       
+        
+        superfetch(url, "json", succ, error, cfg);
+        //window.location.reload();
     }
         
     //success --------------------------------------
     function succ(data) {
         console.log(data); //Hello World!
+        location.reload("http://127.0.0.1:63496/public/createTask.html");
     }
 
     //error ----------------------------------------
@@ -93,25 +90,17 @@
         console.log(err);
     }
     
+
     
     //show tasks in a list -------------------------
     function showList(){
         
         var token = JSON.parse(localStorage.getItem("logindata")).token;
         var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
-        
-
-
-        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/";       
-        
+                
         superfetch(url, "json", function(data){
             
             console.log(data)
-            
-            var token = JSON.parse(localStorage.getItem("logindata")).token;  
-            var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token;
-
-            console.log
             
             for (var i = 0; i < data.length; i++) {
                 var div = document.createElement("div");
@@ -127,13 +116,18 @@
                 
                 div.innerHTML += "<h3 class=" + "'innhold, tittel'" + ">" + data[i].tittel + "</h3>";
                 div.innerHTML += "<p class=" + "'innhold, beskrivelse'" + ">" + data[i].beskrivelse + "</p>";
-
+                div.appendChild(slettKnapp);    
                 cont.appendChild(div);
                 var hr = document.createElement("hr");            
                 
             }
             
-             
+        //success --------------------------------------
+        function succ(data) {
+            console.log(data); 
+            location.reload("http://127.0.0.1:63496/public/createTask.html");
+        }
+            
         }, function(err){
              console.log("showlist: ", err);
             
@@ -259,6 +253,7 @@
             margin: 20px;
             float: left;
             vertical-align: middle;
+            width: 300px;
         }
         .beskrivelse {
             float: left;
@@ -270,6 +265,10 @@
         body {
             background-image: url(../pictures/helloquence-61189.jpg);
             text-align: center;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
         .loggedin {

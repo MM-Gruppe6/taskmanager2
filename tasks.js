@@ -7,19 +7,41 @@ var jwt = require("jsonwebtoken");
 var secret = "frenchfriestastegood!"; //used to check the token
 var logindata; //logindata from the token
 
+//Authorize all travel-endpoints --------------------
+router.use(function (req, res, next) {    
+    
+    //get the token from the URL-variable named 'token'
+    var token = req.query['token']; 
+
+    if (!token) {
+        res.status(403).json({msg: "No token received"}); //send
+        return; //quit
+    }
+    else {
+        try {
+          logindata = jwt.verify(token, secret); //check the token
+        }
+        catch(err) {
+          res.status(403).json({msg: "The token is not valid!"}); //send
+          return; //quit
+        }
+    }
+    
+    next(); //we have a valid token - go to the requested endpoint
+});
 
 
 //endpoint: get travels -----------------------------
 router.get('/', bodyParser, function (req, res) {   
     
-    var sql = `PREPARE get_tasks (text) AS
-            SELECT * FROM taskview WHERE loginnavn=$1;
-            EXECUTE get_tasks('${logindata.loginnavn}')`;
-    console.log(logindata.loginnavn);
+   var sql = `PREPARE get_tasks (text) AS
+            SELECT * FROM taskview WHERE brukernavn=$1;
+            EXECUTE get_tasks('${logindata.brukernavn}')`;
+    
     
     //INSERT INTO travels VALUES(DEFAULT, $2, $3, $4, $5)
     
-    console.log(sql)
+   
     
     db.any(sql).then(function(data) {
         
@@ -39,16 +61,14 @@ router.post('/', bodyParser, function (req, res) {
     var upload = JSON.parse(req.body);
     //Note. the uploaded data should also be sanitized for any malicious code, e.g. use the module ‘sanitize-html’
     
-    var sql = `PREPARE insert_task (int, text, text, timestamp, text) AS
+    /*var sql = `PREPARE insert_task (int, text, text, timestamp, text) AS
         INSERT INTO tasks VALUES(DEFAULT, $2, $3, $4, $5);
-        EXECUTE insert_task (0, '${upload.tittel}', '${upload.beskrivelse}’, '2017-11-03 13:00', '${logindata.loginnavn}')`;
+        EXECUTE insert_task (0, '${upload.tittel}', '${upload.beskrivelse}’, '2017-11-03 13:00', '${logindata.brukernavn}')`;*/
     
-    console.log(sql);
-    //var sql = "INSERT INTO tasks VALUES (DEFAULT, 1, 'dsfdf', 'sdfss', '2016-11-22 12:00')";
+    var sql = `INSERT INTO tasks VALUES(DEFAULT, '${upload.tittel}', '${upload.beskrivelse}', '2017-11-10 12:00', '${logindata.brukernavn}')`;
     
-    //var sql = "SELECT * FROM tasks";
     
-    //INSERT INTO travels VALUES(DEFAULT, $2, $3, $4, $5)
+    
     
     console.log(sql)
     
@@ -69,9 +89,10 @@ router.delete('/', function (req, res) {
 
     var upload = req.query.taskid; //uploaded data should be sanitized
 
-    var sql = `PREPARE delete_tasks (int, text) AS
-        DELETE FROM tasks WHERE id=$1 AND loginnavn=$2 RETURNING *;
-        EXECUTE delete_task('${upload}', '${logindata.loginnavn}')`;
+    var sql = `PREPARE delete_task (int, text) AS
+        DELETE FROM tasks WHERE id=$1 AND brukernavn=$2 RETURNING *;
+        EXECUTE delete_task('${upload}', '${logindata.brukernavn}')`;
+    
     
     console.log(sql)
 
@@ -87,7 +108,7 @@ router.delete('/', function (req, res) {
         }       
 
     }).catch(function(err) {
-        res.status(500).json(err);        
+        res.status(500).json(err);  
     });   
 });
 
