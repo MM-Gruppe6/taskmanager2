@@ -97,14 +97,12 @@
     //show tasks in a list -------------------------
     function showList(){
         
-<<<<<<< HEAD
         var token = JSON.parse(localStorage.getItem("logindata")).token;
         var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
         
 
-=======
+
         var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/";       
->>>>>>> 613abda066972882510f3811e395da46a3a9c71d
         
         superfetch(url, "json", function(data){
             
