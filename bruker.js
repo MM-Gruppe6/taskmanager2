@@ -16,18 +16,18 @@ router.post('/', bodyParser, function (req, res) {
 
     var sql = `PREPARE insert_user (int, text, text, text, text) AS
                 INSERT INTO bruker VALUES(DEFAULT, $2, $3, $4, $5); EXECUTE insert_user
-                (0, '${upload.loginnavn}', '${upload.epost}', '${encrPassw}', '${upload.navn}')`;    
+                (0, '${upload.brukernavn}', '${upload.epost}', '${encrPassw}', '${upload.navn}')`;    
     
     db.any(sql).then(function(data) {
 
         db.any("DEALLOCATE insert_user");
         
         //create the token        
-        var payload = {loginnavn: upload.loginnavn, epost: upload.epost, navn: upload.navn,};
+        var payload = {brukernavn: upload.brukernavn, epost: upload.epost, navn: upload.navn,};
         var tok = jwt.sign(payload, secret, {expiresIn: "12h"});
 
         //send logininfo + token to the client
-        res.status(200).json({loginnavn: upload.loginnavn, epost: upload.epost, navn: upload.navn,  token: tok}); 
+        res.status(200).json({brukernavn: upload.brukernavn, epost: upload.epost, navn: upload.navn,  token: tok}); 
 
     }).catch(function(err) {
 
@@ -45,7 +45,7 @@ router.post('/auth/', bodyParser, function (req, res) {
     
     var sql = `PREPARE get_user (text) AS
                     SELECT * FROM bruker WHERE brukernavn=$1;
-                    EXECUTE get_user('${upload.loginnavn}')`;
+                    EXECUTE get_user('${upload.brukernavn}')`;
     
     console.log(sql);
 
@@ -71,11 +71,11 @@ router.post('/auth/', bodyParser, function (req, res) {
         }
             
         //we have a valid user -> create the token        
-        var payload = {loginnavn: data[0].loginnavn, epost: data[0].epost, navn: data[0].navn};
+        var payload = {brukernavn: data[0].brukernavn, epost: data[0].epost, navn: data[0].navn};
         var tok = jwt.sign(payload, secret, {expiresIn: "12h"});
 
         //send logininfo + token to the client
-        res.status(200).json({loginnavn: data[0].loginnavn, epost: data[0].epost,navn: data[0].navn, token: tok});
+        res.status(200).json({brukernavn: data[0].brukernavn, epost: data[0].epost,navn: data[0].navn, token: tok});
 
     }).catch(function(err) {
 
