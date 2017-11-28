@@ -16,7 +16,8 @@
         <input id="navn" type="text" class="inputfield" placeholder="For- og etternavn"><br>
         <input id="passord"type="password" class="inputfield" placeholder="Passord"><br>
         <button id="btnCreate" class="buttons">Lag bruker!</button>
-        <a href="http://localhost:8080/public/login.html" style="color: white;"><p>Eller logg inn her!</p></a>
+        <a id="logginnher" href="http://127.0.0.1:63496/public/login.html" style="color: white;"><p>Eller logg inn her!</p></a>
+        <a id="logginnher2" hidden="hidden" href="http://127.0.0.1:63496/public/login.html" style="color: white;"><p>Logg inn!</p></a>
     </div>
 </body>
 <script>
@@ -26,7 +27,7 @@
     var inpPassword = document.getElementById("passord");
     var inpFullname = document.getElementById("navn");    
     var btnCreate = document.getElementById("btnCreate"); 
-    
+
     //button click ---------------------------------
     btnCreate.onclick = function() {   
         console.log("vi er inne i funksjonen")
@@ -46,9 +47,13 @@
 
         superfetch(url, "json", succ, error, cfg);
         var cont = document.getElementById("cont");
-        cont.innerHTML += "<p>Gratulerer du har nå laget en konto!</p>"
-        cont.innerHTML += "<a href="+'"http://127.0.0.1:57121/public/createTask.html">'+"<button> Logg inn her</button></a>"
-
+        cont.innerHTML += "<p>Gratulerer du har nå laget en konto!</p>";
+        
+        var logginnher = document.getElementById("logginnher");
+        logginnher.style.display = 'none';
+        var logginnher2 = document.getElementById("logginnher2");
+        logginnher2.removeAttribute("hidden");
+        
     }
 
 
@@ -133,6 +138,16 @@
         cursor: pointer;
     }
     .buttons{
+        height: 40px;
+        width: 101.3%;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: rgba(52,52,52,0);
+        color: white;
+        border: 2px solid white;
+        margin-top: 5px;
+    }
+    #logginnknapp{
         height: 40px;
         width: 101.3%;
         border-radius: 5px;
