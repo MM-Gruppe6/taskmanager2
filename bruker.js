@@ -24,7 +24,7 @@ router.post('/', bodyParser, function (req, res) {
         
         //create the token        
         var payload = {brukernavn: upload.brukernavn, epost: upload.epost, navn: upload.navn,};
-        var tok = jwt.sign(payload, secret, {expiresIn: "12h"});
+        var tok = jwt.sign(payload, secret, {expiresIn: "3h"});
 
         //send logininfo + token to the client
         res.status(200).json({brukernavn: upload.brukernavn, epost: upload.epost, navn: upload.navn,  token: tok}); 
