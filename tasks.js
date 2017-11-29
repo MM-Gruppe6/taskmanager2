@@ -45,7 +45,7 @@ router.get('/', bodyParser, function (req, res) {
     
     db.any(sql).then(function(data) {
         
-        //db.any("DEALLOCATE insert_task");        
+        db.any("DEALLOCATE insert_task");        
         res.status(200).json(data); //success!
 
     }).catch(function(err) {        
@@ -61,10 +61,6 @@ router.post('/', bodyParser, function (req, res) {
     var upload = JSON.parse(req.body);
     //Note. the uploaded data should also be sanitized for any malicious code, e.g. use the module ‘sanitize-html’
     
-    /*var sql = `PREPARE insert_task (int, text, text, timestamp, text) AS
-        INSERT INTO tasks VALUES(DEFAULT, $2, $3, $4, $5);
-        EXECUTE insert_task (0, '${upload.tittel}', '${upload.beskrivelse}’, '2017-11-03 13:00', '${logindata.brukernavn}')`;*/
-    
     var sql = `PREPARE insert_task (int, text, text, timestamp, text) AS
         INSERT INTO tasks VALUES(0, $2, $3, $4, $5);
         EXECUTE insert_task (DEFAULT, '${upload.tittel}', '${upload.beskrivelse}', '2017-11-10 12:00', '${logindata.brukernavn}')`;
@@ -75,7 +71,7 @@ router.post('/', bodyParser, function (req, res) {
     
     db.any(sql).then(function(data) {
         
-        //db.any("DEALLOCATE insert_task");        
+        db.any("DEALLOCATE insert_task");        
         res.status(200).json({msg: "insert ok"}); //success!
 
     }).catch(function(err) {        
