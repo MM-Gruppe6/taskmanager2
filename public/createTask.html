@@ -11,7 +11,7 @@
 
 <body>    
     <nav style="border-radius: 5px; height: 30px; padding: 5px; vertical-align: bottom;">
-        <a class="loggedin" >Logget inn som:</a>
+        <a class="loggetinn" >Logget inn som:</a>
         <a class="logut"  href="#" >Logg ut</a>
     </nav>
     <div id="main-container" background="../pictures/helloquence-61189.jpg">
@@ -54,8 +54,11 @@
     //delete success -------------------------------
     function delSucc(data) {
         console.log(data);
-        location.reload("http://127.0.0.1:63496/public/createTask.html");
+        location.reload();
+
     }
+    
+
 
     //button click ---------------------------------
     btnCreate.onclick = function() {   
@@ -82,7 +85,7 @@
     //success --------------------------------------
     function succ(data) {
         console.log(data); //Hello World!
-        location.reload("http://127.0.0.1:63496/public/createTask.html");
+        location.reload();
     }
 
     //error ----------------------------------------
@@ -125,7 +128,6 @@
         //success --------------------------------------
         function succ(data) {
             console.log(data); 
-            location.reload("http://127.0.0.1:63496/public/createTask.html");
         }
             
         }, function(err){
