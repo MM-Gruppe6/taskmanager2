@@ -51,7 +51,7 @@
         console.log("inne i loggedInAs");
         
         var token = JSON.parse(localStorage.getItem("logindata")).token;
-        var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
+        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/?token=" + token; 
                 
         superfetch(url, "json", function(data){
 
@@ -103,7 +103,7 @@
 
         var id = evt.currentTarget.id;
        
-        var url = " http://localhost:8080/taskmanager2/tasks/?taskid=" + id + "&token=" + token; 
+        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/?taskid=" + id + "&token=" + token; 
        
         superfetch(url, "json", delSucc, error, {method: "DELETE"});
         
@@ -139,7 +139,7 @@
             tid: now.value,
         });
         
-        var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
+        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/?token=" + token; 
         
         var cfg = {
             method: "POST",            
@@ -154,7 +154,7 @@
     //success --------------------------------------
     function succ(data) {
         console.log(data); //Hello World!
-        window.location.replace("/public/createTask.html");    
+        window.location.replace("https://taskmanagergruppe6.herokuapp.com/public/createTask.html");    
     }
 
     //error ----------------------------------------
@@ -168,7 +168,7 @@
     function showList(){
         
         var token = JSON.parse(localStorage.getItem("logindata")).token;
-        var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
+        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/?token=" + token; 
                 
         superfetch(url, "json", function(data){
             
