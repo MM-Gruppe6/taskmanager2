@@ -25,7 +25,10 @@
     var inpLoginname = document.getElementById("brukernavn");
     var inpPassword = document.getElementById("passord");
     var btnLogin = document.getElementById("btnLogin"); 
+    var username = 
     
+    
+    //Lar deg trykke enter i stedet for å måtte ta musen bort på knappen
     inpPassword.addEventListener("keyup", function(event) {
         event.preventDefault();
         if (event.keyCode === 13) {
@@ -33,6 +36,7 @@
         }
     });
     
+    //Lar deg trykke enter i stedet for å måtte ta musen bort på knappen
     inpLoginname.addEventListener("keyup", function(event) {
         event.preventDefault();
         if (event.keyCode === 13) {
@@ -41,7 +45,7 @@
     });
     
     
-    //button click ---------------------------------
+    //button login - onclick funksjon
     btnLogin.onclick = function() {   
     console.log("inni login funksjonen");
         var upload = JSON.stringify({            

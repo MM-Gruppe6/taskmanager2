@@ -10,9 +10,9 @@
 </head>
 
 <body>    
-    <nav style="border-radius: 5px; height: 30px; padding: 5px; vertical-align: bottom;">
-        <a class="loggetinn" >Logget inn som:</a>
-        <a class="logut"  href="#" >Logg ut</a>
+    <nav id="navigation" style="border-radius: 5px; height: 30px; padding: 5px; vertical-align: bottom;">
+        <p class="loggetinn" id="loggedIn" >Logget inn som:</p>
+        <a class="logut"  href="/public/login.html" >Logg ut</a>
     </nav>
     <div id="main-container" background="../pictures/helloquence-61189.jpg">
     <div id="top-field">
@@ -41,24 +41,94 @@
     var token = JSON.parse(localStorage.getItem("logindata")).token;
      
     showList();
+    
+    
+    
+    // Logget inn som: --------------------------------------------------------------------- 
+    
+         loggedInAs();
+    function loggedInAs() {
+        console.log("inne i loggedInAs");
+        
+        var token = JSON.parse(localStorage.getItem("logindata")).token;
+        var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
+                
+        superfetch(url, "json", function(data){
 
+            console.log("Inne i LoggedInAs- med data: " + data[i].brukernavn);
+            var loggetInnSom = document.createElement("p");
+            
+            loggetInnSom.innerHTML = "Logget inn som: " + data[i].brukernavn;
+            document.getElementById("navigation").appendChild(loggetInnSom);
+            
+        })               
+    }
+    
+    //success --------------------------------------
+    function succ(data) {
+        console.log(data); //Hello World!
+    }
+
+    //error ----------------------------------------
+    function error(err) {
+        console.log(err);
+        console.log("You shall not pass!");
+    }
+
+
+    
+    
+    
+    
+    //Kan bruke Enter i stedet for knappeklikk ---------------------------------------------------------------------
+    inpTask.addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            btnCreate.click();
+        }
+    });
+    //Kan bruke Enter i stedet for knappeklikk
+    inpDescr.addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            btnCreate.click();
+        }
+    });
+    
+    
+
+    
+    //Funksjon som sletter tasks ---------------------------------------------------------------------
     function btnDelete(evt) {
 
         var id = evt.currentTarget.id;
        
         var url = " http://localhost:8080/taskmanager2/tasks/?taskid=" + id + "&token=" + token; 
        
-        superfetch(url, "json", delSucc, error, {method: "DELETE"});      
+        superfetch(url, "json", delSucc, error, {method: "DELETE"});
+        
+        function succ(data) {
+
+        //save logindata/token to localStorage 
+        localStorage.setItem("logindata", JSON.stringify(data));
+        location.href="/public/createTask.html";
     }
     
+    //error 
+    function error(err) {
+        console.log(err);
+        var feil = document.getElementById("feilpassord");
+        feil.removeAttribute("hidden");
+    }
+        
+    }
     //delete success -------------------------------
     function delSucc(data) {
         console.log(data);
-        location.reload();
+        location.reload(true);
 
     }
     
-
 
     //button click ---------------------------------
     btnCreate.onclick = function() {   
@@ -69,23 +139,22 @@
             tid: now.value,
         });
         
-         var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
+        var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
         
         var cfg = {
             method: "POST",            
             body: upload
         } 
         
-       
-        
         superfetch(url, "json", succ, error, cfg);
         //window.location.reload();
+    
     }
         
     //success --------------------------------------
     function succ(data) {
         console.log(data); //Hello World!
-        location.reload();
+        window.location.replace("/public/createTask.html");    
     }
 
     //error ----------------------------------------
@@ -93,8 +162,8 @@
         console.log(err);
     }
     
-
     
+        
     //show tasks in a list -------------------------
     function showList(){
         
@@ -103,7 +172,7 @@
                 
         superfetch(url, "json", function(data){
             
-            console.log(data)
+            console.log(data);
             
             for (var i = 0; i < data.length; i++) {
                 var div = document.createElement("div");
@@ -124,15 +193,14 @@
                 var hr = document.createElement("hr");            
                 
             }
-            
+        
         //success --------------------------------------
         function succ(data) {
             console.log(data); 
-        }
-            
+        }            
+        
         }, function(err){
              console.log("showlist: ", err);
-            
         });
     }
 
