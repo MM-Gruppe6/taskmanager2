@@ -16,7 +16,7 @@
     <input id="passord" class="inputfield" type="password" placeholder="Passord"><br>
     <button id="btnLogin" class="buttons">Logg inn!</button>
     <p style="color: white;">Har du ikke bruker?</p>
-    <a href="https://taskmanagergruppe6.herokuapp.com/public/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
+    <a href="/public/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
     <p hidden="hidden" id="feilpassord" style="color: white; background-color: #CD0000">Feil brukernavn eller passord</p>
     </div>
 </body>
@@ -55,7 +55,9 @@
         });
 
         console.log(upload);
-        var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/bruker/auth/";
+        //var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/bruker/auth/";
+        var url = "http://localhost:8080/taskmanager2/bruker/auth/";
+
         
         var cfg = {
             method: "POST",            
