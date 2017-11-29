@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>Task manager 2.0</title>    
     <script src="superfetch2.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Black" rel="stylesheet">
 </head>
@@ -14,17 +15,17 @@
         <p class="loggetinn" id="loggedIn" >Velkommen:</p>
         <a class="logut"  href="/public/login.html" >Logg ut</a>
     </nav>
-    <div id="main-container" background="../pictures/helloquence-61189.jpg">
-    <div id="top-field">
-    <img id="logo" src="../pictures/Taskmanager_white.png" style="width: 100%; margin-bottom: 30px;"><br> 
-    <input id="inpTask" class="inputfield" placeholder="Tittel"><br>  
-    <input id="inpDescr" class="inputfield" placeholder="Beskrivelse..."><br>
-    <button id="btnCreate">Lag oppgave</button>
-    </div>
-    <h2 id="oppgaver">Dine oppgaver:</h2>
+    <div id="cont" background="../pictures/helloquence-61189.jpg">
+        <div id="top-field">
+            <img id="logo" src="../pictures/Taskmanager_white.png" style="width: 100%; margin-bottom: 30px;"><br> 
+            <input id="inpTask" class="inputfield" placeholder="Tittel"><br>  
+            <input id="inpDescr" class="inputfield" placeholder="Beskrivelse..."><br>
+            <button id="btnCreate">Lag oppgave</button>
+        </div>
+        <h2 id="oppgaver">Dine oppgaver:</h2>
 
-    <div id="cont">
-    </div>
+
+
     </div>
 </body>    
 
@@ -74,7 +75,7 @@
 
         //save logindata/token to localStorage 
         localStorage.setItem("logindata", JSON.stringify(data));
-        location.href="/public/createTask.html";
+        location.reload(true);
     }
     
     //error 
@@ -105,20 +106,20 @@
        // var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/?token=" + token;
         var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token;
         
+        
         var cfg = {
             method: "POST",            
             body: upload
         } 
         
         superfetch(url, "json", succ, error, cfg);
-        //window.location.reload();
     
     }
         
     //success --------------------------------------
     function succ(data) {
         console.log(data); //Hello World!
-        location.reload(true);
+        //location.reload(true);
         //window.location.replace("https://taskmanagergruppe6.herokuapp.com/public/createTask.html");    
         //window.location.replace("http://localhost:8080/public/createTask.html");    
     }
@@ -136,7 +137,9 @@
         var token = JSON.parse(localStorage.getItem("logindata")).token;
         //var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/tasks/?token=" + token; 
         var url = "http://localhost:8080/taskmanager2/tasks/?token=" + token; 
-                
+        console.log(url);
+        
+        
         superfetch(url, "json", function(data){
             
             console.log(data);
@@ -173,31 +176,32 @@
     }
 
     </script>
+   
+
     <style>
         
-    *{
-        font-family: 'Raleway', sans-serif;
-    }
+        /**{
+            font-family: 'Raleway', sans-serif;
+        }
 
-    .inputfield {
-        height: 40px;
-        text-align: center;
-        border-radius: 2px;
-        width: 100%;
-        background-color: rgba(0,0,0,0.3);
-        border: 2px solid white;
-        
-    }    
+        .inputfield {
+            height: 40px;
+            text-align: center;
+            border-radius: 2px;
+            width: 100%;
+            background-color: rgba(0,0,0,0.3);
+            border: 2px solid white;
 
-    .inputfield:focus {
-        outline: none;
-        color: white;
-    }
-    .inputfield::placeholder {
-        color: white;
-        font-family: monospace, sans-serif;
-    }
-        
+        }    
+
+        .inputfield:focus {
+            outline: none;
+            color: white;
+        }
+        .inputfield::placeholder {
+            color: white;
+        }
+
         #btnCreate{
             height: 37px;
             width: 250px;
@@ -221,13 +225,13 @@
         }
         
         #main-container {
-        padding: 150px;
-        text-align: center;
-        width: 300px;
-        margin:0 auto;
-        background-color: rgba(255,255,255,0.5);
-        border-radius:10px;
-        margin-top: 150px;
+            padding: 150px;
+            text-align: center;
+            width: 300px;
+            margin:0 auto;
+            background-color: rgba(255,255,255,0.5);
+            border-radius:10px;
+            margin-top: 150px;
     }
 
 
@@ -251,7 +255,7 @@
         }
         
         /*Tasks*/
-        .slettknapp {
+        /*.slettknapp {
             border-radius: 7px;
             height: 50px;
             width: 50px;
@@ -300,7 +304,7 @@
         }
         /*Tasks slutt*/
         
-        body {
+       /* body {
             background-image: url(../pictures/helloquence-61189.jpg);
             text-align: center;
             background-attachment: fixed;
@@ -340,4 +344,5 @@
             background-color: rgba(255,255,255,0.5);
         }
     </style>
+    
 </html>

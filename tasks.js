@@ -34,9 +34,9 @@ router.use(function (req, res, next) {
 //endpoint: get travels -----------------------------
 router.get('/', bodyParser, function (req, res) {   
     
-   var sql = `PREPARE get_tasks (text) AS
+   var sql = `PREPARE get_task (text) AS
             SELECT * FROM taskview WHERE brukernavn=$1;
-            EXECUTE get_tasks('${logindata.brukernavn}')`;
+            EXECUTE get_task('${logindata.brukernavn}')`;
     
     
     //INSERT INTO travels VALUES(DEFAULT, $2, $3, $4, $5)
@@ -62,8 +62,10 @@ router.post('/', bodyParser, function (req, res) {
     //Note. the uploaded data should also be sanitized for any malicious code, e.g. use the module ‘sanitize-html’
     
     var sql = `PREPARE insert_task (int, text, text, timestamp, text) AS
-        INSERT INTO tasks VALUES(0, $2, $3, $4, $5);
-        EXECUTE insert_task (DEFAULT, '${upload.tittel}', '${upload.beskrivelse}', '2017-11-10 12:00', '${logindata.brukernavn}')`;
+        INSERT INTO tasks VALUES(DEFAULT, $2, $3, $4, $5);
+        EXECUTE insert_task (0, '${upload.tittel}', '${upload.beskrivelse}', '2017-11-10 12:00', '${logindata.brukernavn}')`;
+    
+    console.log(sql)
     
     
     

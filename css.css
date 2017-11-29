@@ -1,0 +1,168 @@
+*{
+    font-family: 'Raleway', sans-serif;
+}
+
+.inputfield {
+    height: 40px;
+    text-align: center;
+    border-radius: 2px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.3);
+    border: 2px solid white;
+}    
+
+.inputfield:focus {
+    outline: none;
+    color: white;
+}    
+
+.inputfield::placeholder {
+    color: white;
+}
+
+#btnCreate{
+    height: 37px;
+    width: 250px;
+    border-radius: 25px;
+    margin-left: 3px;
+    margin-top: 5px;
+    color: white;
+    border:2px solid white;
+    background-color: grey;
+        }
+#btnCreate:hover{
+    height: 37px;
+    width: 250px;
+    border-radius: 25px;
+    margin-left: 3px;
+    margin-top: 5px;
+    color: gray;
+    border:2px solid grey;
+    background-color: white;
+    cursor: pointer;
+}
+    
+#cont, #main-container {
+    padding: 150px;
+    text-align: center;
+    width: 300px;
+    margin:0 auto;
+    background-color: rgba(255,255,255,0.5);
+    border-radius:10px;
+    margin-top: 150px;
+}
+
+
+/*#cont {
+    width: 30%;
+}*/
+
+#inpDescr::placeholder{
+    padding-top: 10px;
+}
+#inpDescr:focus {
+    padding-bottom:-20px;
+    padding-top: 10px;
+}
+#cont>h3 {
+    text-align: center;
+            
+}
+#oppgaver {
+    color: white;
+}
+        
+/*Tasks*/
+.slettknapp {
+    border-radius: 7px;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    border: 2px solid grey;
+    font-size: 30px;
+    margin-top: 20px;
+            
+}
+.slettknapp:hover {
+    cursor: pointer;
+    border-radius: 7px;
+    height: 50px;
+    width: 50px;
+    background-color: grey;
+    border: 2px solid white;
+    color: white;
+    font-size: 30px;
+}
+.element {
+    width: 335%;
+    height: 180px;
+    border-radius: 7px;
+    margin-bottom: 25px;
+    vertical-align: baseline;
+    background-color: pink;
+}
+        
+.element>h3 {
+    padding: 15px;
+    padding-left: 25px;
+    float: left;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+.innhold {
+    margin: 20px;
+    float: left;
+    vertical-align: middle;
+    width: 300px;
+}
+.beskrivelse {
+    float: left;
+    padding: 20px;
+            
+}
+/*Tasks slutt*/
+        
+body {
+    background-image: url(pictures/helloquence-61189.jpg);
+    text-align: center;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.loggedin {
+    font-size: 20px;
+    float: left;
+    font-family: 'Abel', sans-serif;
+    text-decoration: none;
+    color: black;
+    padding-left: 15px;
+
+}
+.loggedin:hover {
+    font-size: 20px;
+    float: left;
+    font-family: 'Abel', sans-serif;
+    text-decoration: none;
+    color: black;
+    padding-left: 15px;
+    cursor: default;
+}
+        
+.logut {
+    font-family: 'Abel', sans-serif;
+    text-decoration: none; 
+    float: right;
+    color: black;
+    font-size: 20px;
+    padding-right: 15px;
+}
+nav {
+    background-color: rgba(255,255,255,0.5);    
+}
+
+.liste {
+    background-color: pink;
+}

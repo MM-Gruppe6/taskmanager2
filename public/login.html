@@ -4,11 +4,12 @@
     <meta charset="utf-8" />
     <title>Task manager 2.0</title>    
     <script src="superfetch2.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Black" rel="stylesheet">
 </head>
 <body>
-    <div id="cont" style="text-align: center;">
+    <div id="cont1" style="text-align: center;">
     <img id="logo" src="../pictures/Taskmanager_white.png"> 
     <h3 id="simply">- Simply a taskmanager - </h3>
     <h3 style="color: white;">Logg inn</h3>
@@ -16,7 +17,7 @@
     <input id="passord" class="inputfield" type="password" placeholder="Passord"><br>
     <button id="btnLogin" class="buttons">Logg inn!</button>
     <p style="color: white;">Har du ikke bruker?</p>
-    <a href="/public/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
+    <a href="/taskmanager2/public/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
     <p hidden="hidden" id="feilpassord" style="color: white; background-color: #CD0000">Feil brukernavn eller passord</p>
     </div>
 </body>
@@ -71,7 +72,7 @@
 
         //save logindata/token to localStorage 
         localStorage.setItem("logindata", JSON.stringify(data));
-        location.href="/public/createTask.html";
+        location.href="/taskmanager2/public/createTask.html";
     }
     
     //error ----------------------------------------
@@ -84,6 +85,10 @@
 
 </script>
 <style>
+    
+    /**{
+        font-family: 'Raleway', sans-serif;
+    }
     
     body {
         background-image: url(../pictures/helloquence-61189.jpg);
@@ -108,7 +113,6 @@
     }
     
     #simply {
-        font-family: monospace, sans-serif;
         margin-top: -5px;
         color: white;
     }
@@ -119,7 +123,6 @@
         width: 100%;
         background-color: rgba(0,0,0,0.3);
         border: 2px solid white;
-        
     }    
 
     .inputfield:focus {
@@ -145,7 +148,6 @@
         height: 40px;
         width: 101.3%;
         border-radius: 5px;
-        
         background-color: rgba(52,52,52,0);
         color: white;
         border: 2px solid white;
@@ -153,7 +155,6 @@
     }
     .inputfield::placeholder {
         color: white;
-        font-family: monospace, sans-serif;
-    }
+    }*/
 </style>
 </html>

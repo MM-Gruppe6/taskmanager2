@@ -4,11 +4,12 @@
     <meta charset="utf-8" />
     <title>Task manager 2.0</title>    
     <script src="superfetch2.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Black" rel="stylesheet">
 </head>
 <body>
-    <div id="cont">
+    <div id="cont1">
         <img id="logo" src="../pictures/Taskmanager_white.png">         
         <h3 style="color: white;">Lag din bruker her!</h3>
         <input id="brukernavn" class="inputfield" type="text" placeholder="Brukernavn"><br>
@@ -16,8 +17,8 @@
         <input id="navn" type="text" class="inputfield" placeholder="For- og etternavn"><br>
         <input id="passord"type="password" class="inputfield" placeholder="Passord"><br>
         <button id="btnCreate" class="buttons">Lag bruker!</button>
-        <a id="logginnher" href="/public/login.html" style="color: white;"><p>Eller logg inn her!</p></a>
-        <a id="logginnher2" hidden="hidden" href="/public/login.html" style="color: white;"><p>Logg inn!</p></a>
+        <a id="logginnher" href="/taskmanager2/public/login.html" style="color: white;"><p>Eller logg inn her!</p></a>
+        <a id="logginnher2" hidden="hidden" href="/taskmanager2/public/login.html" style="color: white;"><p>Logg inn!</p></a>
     </div>
 </body>
 <script>
@@ -39,7 +40,7 @@
         });
         
         //var url = "https://taskmanagergruppe6.herokuapp.com/taskmanager2/bruker/";
-        var url = "http://localhost:8080/taskmanager2/bruker/";
+        var url = "/taskmanager2/bruker/";
 
         var cfg = {
             method: "POST",            
@@ -74,21 +75,12 @@
 
 </script>
 <style>
-    #cont {
-        width: 700px;
-        background-color: grey;
-        text-align: center;
-        padding: 25px;
-    }
-        #cont {
-        width: 700px;
-        background-color: grey;
-        text-align: center;
-        padding: 25px;
+    /**{
+        font-family: 'Raleway', sans-serif;
     }
     
     body {
-        background-image: url(../pictures/helloquence-61189.jpg)
+        background-image: url(../pictures/helloquence-61189.jpg);
     }
     
     #cont {
@@ -100,12 +92,11 @@
         border-radius:10px;
         margin-top: 150px;
     }
-        #logo {
+    #logo {
         width: 100%;
     }
     
     #simply {
-        font-family: monospace, sans-serif;
         margin-top: -5px;
         color: white;
     }
@@ -160,7 +151,6 @@
     }
     .inputfield::placeholder {
         color: white;
-        font-family: monospace, sans-serif;
-    }
+    }*/
 </style>
 </html>
