@@ -8,7 +8,7 @@ var bcrypt = require('bcrypt');
 var secret = "frenchfriestastegood!"; //used to create the token
 
                      
-//endpoint: POST users -----------------------------
+//endpoint: POST users 
 router.post('/', bodyParser, function (req, res) {
 
     var upload = JSON.parse(req.body);  //should be sanitized
@@ -38,7 +38,7 @@ router.post('/', bodyParser, function (req, res) {
 
 
 //Autoriserer bruker
-//endpoint for login: POST users/auth/ ----------------
+//endpoint for login: POST users/auth/
 router.post('/auth/', bodyParser, function (req, res) {
     
     var upload = JSON.parse(req.body); //should be sanitized

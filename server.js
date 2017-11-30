@@ -11,12 +11,9 @@ app.use(function(req, res, next) {
     next(); //go to the specified route
 });
 
+
 app.use(express.static(__dirname + '/public'));
 
-// -----------------------------------------------
-//route handling is delegated to:
-
-//Jostein, stemmer dette, evt. hva skal stå her og hvorfor?
 var tasks = require('./tasks.js');
 app.use('/taskmanager2/tasks/', tasks);
 
@@ -26,8 +23,5 @@ app.use('/taskmanager2/bruker/', bruker);
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
-  console.log('Server listening on port 8080!');
-    
-    //______________________________
-    
+  console.log('Server listening on port 8080!');    
 });
