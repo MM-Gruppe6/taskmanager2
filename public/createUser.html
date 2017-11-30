@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <title>Task manager 2.0</title>    
     <script src="superfetch2.js"></script>
+    <link rel="shortcut icon" type="image/png" href="/public/pictures/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="http://taskmanagergruppe6.herokuapp.com/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="/css.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Black" rel="stylesheet">
@@ -49,7 +51,7 @@
 
         superfetch(url, "json", succ, error, cfg);
         var cont = document.getElementById("cont");
-        cont.innerHTML += "<p>Gratulerer du har nå laget en konto!</p>";
+        cont.innerHTML += '<p style="color:white;"' + ">Gratulerer du har nå laget en konto!</p>";
         
         var logginnher = document.getElementById("logginnher");
         logginnher.style.display = 'none';
