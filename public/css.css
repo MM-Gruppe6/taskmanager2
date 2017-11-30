@@ -47,9 +47,12 @@
     text-align: center;
     width: 600px;
     margin:0 auto;
-    background-color: rgba(255,255,255,0.5);
+
+    background-color: #faffbd;
     border-radius:10px;
     margin-top: 150px;
+    margin-bottom: 130px;
+    box-shadow: 0 0 30px rgba(0,0,0,.6);
 }
 
 
@@ -125,12 +128,19 @@
 /*Tasks slutt*/
         
 body {
-    background-image: url(pictures/helloquence-61189.jpg);
+    /*background-image: url(pictures/helloquence-61189.jpg);
     text-align: center;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    */
+    background: #5ad75a;
+    
+    background: -webkit-linear-gradient(left top, #5ad75a, #2bb2ff); 
+    background: -o-linear-gradient(bottom right, #5ad75a, #2bb2ff); 
+    background: -moz-linear-gradient(bottom right, #5ad75a, #2bb2ff); 
+    background: linear-gradient(to bottom right, #5ad75a, #2bb2ff);
 }
 
 .loggedin {
