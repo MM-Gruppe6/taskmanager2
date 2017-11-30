@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>Task manager 2.0</title>    
     <script src="superfetch2.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css.css">
+    <link rel="stylesheet" type="text/css" href="/css.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Black" rel="stylesheet">
 </head>
@@ -13,14 +13,14 @@
 <body>    
     <nav id="navigation" style="border-radius: 5px; height: 30px; padding: 5px; vertical-align: bottom;">
         <p class="loggetinn" id="loggedIn" >Velkommen:</p>
-        <a class="logut"  href="/public/login.html" >Logg ut</a>
+        <a class="logut"  href="/index.html" >Logg ut</a>
     </nav>
-    <div id="cont" background="../pictures/helloquence-61189.jpg">
+    <div id="cont" class="container" background="/pictures/helloquence-61189.jpg">
         <div id="top-field">
-            <img id="logo" src="../pictures/Taskmanager_white.png" style="width: 100%; margin-bottom: 30px;"><br> 
+            <img class="logo" src="/pictures/Taskmanager_white.png" style="width: 100%; margin-bottom: 30px;"><br> 
             <input id="inpTask" class="inputfield" placeholder="Tittel"><br>  
             <input id="inpDescr" class="inputfield" placeholder="Beskrivelse..."><br>
-            <button id="btnCreate">Lag oppgave</button>
+            <button id="btnCreate" class="buttons">Lag oppgave</button>
         </div>
         <h2 id="oppgaver">Dine oppgaver:</h2>
 
@@ -119,7 +119,7 @@
     //success --------------------------------------
     function succ(data) {
         console.log(data); //Hello World!
-        //location.reload(true);
+        showList();
         //window.location.replace("https://taskmanagergruppe6.herokuapp.com/public/createTask.html");    
         //window.location.replace("http://localhost:8080/public/createTask.html");    
     }
@@ -149,20 +149,22 @@
                 var div = document.createElement("div");
                 
                 div.className = "element";
-                div.innerHTML += "<hr>";
                 var slettKnapp = document.createElement("button");
                 slettKnapp.id = data[i].id;
 
                 slettKnapp.className = "innhold, slettknapp";
                 slettKnapp.innerHTML = "✔";
                 slettKnapp.addEventListener("click", btnDelete);
-                
+                var br = document.createElement("br");
                 div.innerHTML += "<h3 class=" + "'innhold, tittel'" + ">" + data[i].tittel + "</h3>";
-                div.innerHTML += "<p class=" + "'innhold, beskrivelse'" + ">" + data[i].beskrivelse + "</p>";
-                div.appendChild(slettKnapp);    
-                cont.appendChild(div);
-                var hr = document.createElement("hr");            
+                //div.innerHTML += "<p class=" + "'innhold, beskrivelse'" + ">" + data[i].beskrivelse + "</p>";
+                div.appendChild(slettKnapp);
+                var besk = document.createElement("p");
+                besk.className = "innhold, beskrivelse"; 
+                besk.innerHTML = data[i].beskrivelse; 
                 
+                div.appendChild(besk);
+                cont.appendChild(div);
             }
         
         //success --------------------------------------

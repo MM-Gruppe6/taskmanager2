@@ -4,20 +4,20 @@
     <meta charset="utf-8" />
     <title>Task manager 2.0</title>    
     <script src="superfetch2.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css.css">
+    <link rel="stylesheet" type="text/css" href="/css.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Black" rel="stylesheet">
 </head>
 <body>
-    <div id="cont" style="text-align: center;">
-        <img id="logo" src="../pictures/Taskmanager_white.png"> 
+    <div id="cont" class="container" style="text-align: center;">
+        <img class="logo" src="/pictures/Taskmanager_white.png"> 
         <h3 id="simply">- Simply a taskmanager - </h3>
         <h3 style="color: white;">Logg inn</h3>
         <input id="brukernavn" class="inputfield" type="text" placeholder="Brukernavn"><br>
         <input id="passord" class="inputfield" type="password" placeholder="Passord"><br>
         <button id="btnLogin" class="buttons">Logg inn!</button>
         <p style="color: white;">Har du ikke bruker?</p>
-        <a href="/taskmanager2/public/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
+        <a href="/createUser.html" style="color: white;"> <p>Lag bruker her!</p></a>
         <p hidden="hidden" id="feilpassord" style="color: white; background-color: #CD0000">Feil brukernavn eller passord</p>
         </div>
 </body>
@@ -26,7 +26,7 @@
     var inpLoginname = document.getElementById("brukernavn");
     var inpPassword = document.getElementById("passord");
     var btnLogin = document.getElementById("btnLogin"); 
-    var username = 
+    
     
     
     //Lar deg trykke enter i stedet for å måtte ta musen bort på knappen
@@ -72,7 +72,7 @@
 
         //save logindata/token to localStorage 
         localStorage.setItem("logindata", JSON.stringify(data));
-        location.href="/taskmanager2/public/createTask.html";
+        location.href="/createTask.html";
     }
     
     //error ----------------------------------------
