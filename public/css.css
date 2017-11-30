@@ -169,6 +169,11 @@ nav {
     background-color: #1d4e69;
     box-shadow: 0 0 30px rgba(0,0,0,.6);
     vertical-align: center;
+    overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 98.7%;
+
 }
 
 .liste {
