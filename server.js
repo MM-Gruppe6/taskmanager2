@@ -11,6 +11,8 @@ app.use(function(req, res, next) {
     next(); //go to the specified route
 });
 
+app.use(express.static(__dirname + '/public'));
+
 // -----------------------------------------------
 //route handling is delegated to:
 

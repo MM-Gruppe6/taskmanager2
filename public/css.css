@@ -6,7 +6,7 @@
     height: 40px;
     text-align: center;
     border-radius: 2px;
-    width: 100%;
+    width: 102%;
     background-color: rgba(0,0,0,0.3);
     border: 2px solid white;
 }    
@@ -20,7 +20,7 @@
     color: white;
 }
 
-#btnCreate{
+.buttons{
     height: 37px;
     width: 250px;
     border-radius: 25px;
@@ -30,7 +30,7 @@
     border:2px solid white;
     background-color: grey;
         }
-#btnCreate:hover{
+.buttons:hover{
     height: 37px;
     width: 250px;
     border-radius: 25px;
@@ -42,20 +42,16 @@
     cursor: pointer;
 }
     
-#cont, #main-container {
+.container {
     padding: 150px;
     text-align: center;
-    width: 300px;
+    width: 600px;
     margin:0 auto;
     background-color: rgba(255,255,255,0.5);
     border-radius:10px;
     margin-top: 150px;
 }
 
-
-/*#cont {
-    width: 30%;
-}*/
 
 #inpDescr::placeholder{
     padding-top: 10px;
@@ -80,8 +76,7 @@
     background-color: white;
     border: 2px solid grey;
     font-size: 30px;
-    margin-top: 20px;
-            
+    float: right;
 }
 .slettknapp:hover {
     cursor: pointer;
@@ -94,32 +89,38 @@
     font-size: 30px;
 }
 .element {
-    width: 335%;
-    height: 180px;
+    width: 92%;
     border-radius: 7px;
-    margin-bottom: 25px;
-    vertical-align: baseline;
-    background-color: pink;
+    vertical-align:middle;
+    background-color: white;
+    padding: 50px;
+    margin-bottom: 15px;
+    padding-left: 25px;
+    height: auto;
 }
         
 .element>h3 {
-    padding: 15px;
+    
     padding-left: 25px;
     float: left;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 15px;
+
+
 }
-.innhold {
-    margin: 20px;
-    float: left;
-    vertical-align: middle;
-    width: 300px;
-}
+
 .beskrivelse {
-    float: left;
-    padding: 20px;
+    float: auto;
+    padding-top: 55px;
+    text-align: left;
+    padding-left: 25px;
             
+}
+
+.innhold {
+    float: left;
+    margin-bottom: 50px;
+
 }
 /*Tasks slutt*/
         
@@ -165,4 +166,12 @@ nav {
 
 .liste {
     background-color: pink;
+}
+#loggedIn{
+    float: left;
+    margin-bottom: 500px;
+    margin-left: 10px;
+}
+.logo {
+    width:100%;
 }
