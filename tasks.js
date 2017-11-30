@@ -45,7 +45,7 @@ router.get('/', bodyParser, function (req, res) {
     
     db.any(sql).then(function(data) {
         
-        db.any("DEALLOCATE insert_task");        
+        db.any("DEALLOCATE get_task");        
         res.status(200).json(data); //success!
 
     }).catch(function(err) {        
@@ -88,16 +88,18 @@ router.delete('/', function (req, res) {
 
     var upload = req.query.taskid; //uploaded data should be sanitized
 
-    var sql = `PREPARE delete_task (int, text) AS
+    /*var sql = `PREPARE delete_task (int, text) AS
         DELETE FROM tasks WHERE id=$1 AND brukernavn=$2 RETURNING *;
-        EXECUTE delete_task('${upload}', '${logindata.brukernavn}')`;
+        EXECUTE delete_task('${upload}', '${logindata.brukernavn}')`;*/
+    
+    var sql = `DELETE FROM tasks WHERE id=${upload} AND brukernavn='${logindata.brukernavn}' RETURNING *`;
     
     
     console.log(sql)
 
     db.any(sql).then(function(data) {
 
-        db.any("DEALLOCATE delete_task");       
+        //db.any("DEALLOCATE delete_task");       
 
         if (data.length > 0) {
             res.status(200).json({msg: "delete ok"}); //success!
